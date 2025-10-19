@@ -27,6 +27,7 @@ export default function Home() {
             items={[
                 { src: "/images/gallery/1.png?v=1", author: "Welcome to Season 2!" },
                 { src: "/images/gallery/2.png?v=1", author: "Nether Tomfoolery..." },
+                { src: "/images/gallery/3.png?v=1", author: "Steph_OVGU & Arturias_Yulind" },
             ]}
             autoPlay
             interval={5000}
