@@ -14,7 +14,7 @@ export function CommunitySection() {
     useEffect(() => {
         async function fetchStatus() {
             try {
-                const res = await fetch("https://api.mcstatus.io/v2/status/java/brassworks.572.at");
+                const res = await fetch("https://api.mcstatus.io/v2/status/java/brassworks.opnsoc.org");
                 const data = await res.json();
 
                 setStatus({
@@ -49,7 +49,7 @@ export function CommunitySection() {
                     <div className="flex flex-col gap-6 w-full h-[500px]">
                         {[
                             {
-                                href: "https://brassmap.572.at",
+                                href: "https://brassworks.opnsoc.org/map",
                                 icon: <Map className="h-5 w-5" />,
                                 iconBg:
                                     "bg-green-500/20 text-green-600 dark:bg-green-400/20 dark:text-green-300",

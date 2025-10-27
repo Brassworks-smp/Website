@@ -10,9 +10,9 @@ export const metadata = {
     other: {
         'og:title': "Brassworks – Create SMP",
         'og:description': "Our public server thrives on cooperation between players - express your creativity freely, with each other.",
-        'og:url': "https://brassworks.572.at/",
+        'og:url': "https://brassworks.opnsoc.org/",
         'og:type': "website",
-        'og:image': "https://brassworks.572.at/images/logo.png",
+        'og:image': "https://brassworks.opnsoc.org/images/logo.png",
     },
 };
 

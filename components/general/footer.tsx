@@ -24,7 +24,7 @@ export function Footer() {
                 <Coffee className="h-5 w-5" />
                 <span className="sr-only">Kofi</span>
               </Link>
-              <Link target="_blank" href="https://brassmap.572.at" className="text-muted-foreground hover:text-foreground transition">
+              <Link target="_blank" href="https://brassworks.opnsoc.org/map" className="text-muted-foreground hover:text-foreground transition">
                 <Map className="h-5 w-5" />
                 <span className="sr-only">Live Map</span>
               </Link>
