@@ -40,7 +40,7 @@ export function CommunitySection() {
                         Stay Connected
                     </h2>
                     <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-                        Whether you want to chat, support us, or explore the world – here's how you can
+                        Whether you want to chat, support us, or explore the world - here's how you can
                         join the Brassworks community beyond the game.
                     </p>
                 </div>

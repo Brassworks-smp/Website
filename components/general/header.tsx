@@ -43,7 +43,7 @@ export function Header() {
                   </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
-                    <Link target="_blank" href="https://brassworks.opnsoc.org/map" className={navigationMenuTriggerStyle()}>
+                    <Link href="https://brassworks.opnsoc.org/map" className={navigationMenuTriggerStyle()}>
                       Live Map
                     </Link>
                   </NavigationMenuLink>
@@ -91,7 +91,7 @@ export function Header() {
                   <Link href="/#gallery" className="px-2 py-1 rounded-md hover:bg-muted">
                     Gallery
                   </Link>
-                  <Link target="_blank" href="https://brassworks..opnsoc.org/" className="px-2 py-1 rounded-md hover:bg-muted">
+                  <Link href="https://brassworks.opnsoc.org/map" className="px-2 py-1 rounded-md hover:bg-muted">
                     Live Map
                   </Link>
                   <Link target="_blank" href="https://ko-fi.com/brassworks" className="px-2 py-1 rounded-md hover:bg-muted">

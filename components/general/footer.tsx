@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Logo } from '@/components/logo';
-import { Map, Coffee } from 'lucide-react';
+import {Map, Coffee, Github} from 'lucide-react';
 import { Icons } from '../icons';
 
 export function Footer() {
@@ -20,11 +20,15 @@ export function Footer() {
                 <Icons.discord className="h-5 w-5" />
                 <span className="sr-only">Discord</span>
               </Link>
-              <Link href="https://ko-fi.com/brassworks" className="text-muted-foreground hover:text-foreground transition">
+              <Link target="_blank" href="https://ko-fi.com/brassworks" className="text-muted-foreground hover:text-foreground transition">
                 <Coffee className="h-5 w-5" />
                 <span className="sr-only">Kofi</span>
               </Link>
-              <Link target="_blank" href="https://brassworks.opnsoc.org/map" className="text-muted-foreground hover:text-foreground transition">
+                <Link href="https://github.com/Brassworks-smp" className="text-muted-foreground hover:text-foreground transition">
+                    <Github className="h-5 w-5" />
+                    <span className="sr-only">GitHub</span>
+                </Link>
+              <Link href="https://brassworks.opnsoc.org/map" className="text-muted-foreground hover:text-foreground transition">
                 <Map className="h-5 w-5" />
                 <span className="sr-only">Live Map</span>
               </Link>
@@ -56,7 +60,7 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-muted flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © 2025 Brassworks. All rights reserved.
+              © 2025 Brassworks. This website is open-source under the Apache 2.0 License.
           </p>
         </div>
       </div>

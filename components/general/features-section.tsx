@@ -22,7 +22,7 @@ const features = [
   },
   {
     icon: ServerCog,
-    title: "Fast & Reliable Server",
+    title: "High-End Server",
     description: "A high-performance server built for stability and speed - always pushing to deliver the best experience possible."
   },
   {
@@ -64,23 +64,27 @@ export function FeaturesSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, idx) => (
-            <div 
-              key={idx}
-              data-idx={idx}
-              className={cn(
-                "feature-item bg-card/50 border rounded-lg p-6 transition-all duration-500",
-                visibleItems.includes(idx) 
-                  ? "opacity-100 translate-y-0" 
-                  : "opacity-0 translate-y-10"
-              )}
-              style={{ transitionDelay: `${idx * 100}ms` }}
-            >
-              <div className="h-12 w-12 bg-amber-400/60 flex items-center justify-center rounded-lg mb-5">
-                <feature.icon className="h-6 w-6 text-neutral-100" />
+              <div
+                  key={idx}
+                  data-idx={idx}
+                  className={cn(
+                      "feature-item bg-card/60 p-6 transition-all duration-500 relative",
+                      visibleItems.includes(idx)
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-10"
+                  )}
+                  style={{transitionDelay: `${idx * 100}ms`}}
+              >
+                  <div className="absolute top-0 right-0 z-10 h-1.5 w-3 bg-background"></div>
+                  <div className="absolute top-0 left-0 z-10 h-1.5 w-3 bg-background"></div>
+                  <div className="absolute bottom-0 right-0 z-10 h-1.5 w-3 bg-background"></div>
+                  <div className="absolute bottom-0 left-0 z-10 h-1.5 w-3 bg-background"></div>
+                  <div className="h-12 w-12 bg-amber-400/60 flex items-center justify-center rounded-lg mb-5">
+                      <feature.icon className="h-6 w-6 text-neutral-100"/>
+                  </div>
+                  <h3 className="font-bold font-minecraft text-xl mb-3">{feature.title}</h3>
+                  <p className="text-muted-foreground">{feature.description}</p>
               </div>
-              <h3 className="font-bold text-xl mb-3">{feature.title}</h3>
-              <p className="text-muted-foreground">{feature.description}</p>
-            </div>
           ))}
         </div>
       </div>

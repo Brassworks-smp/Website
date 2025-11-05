@@ -25,7 +25,7 @@ export function SeasonsSection() {
             title: "Season 2",
             name: "New World",
             description:
-                "Season Two lifts off with live map, brand-new mods, and a fresh world to explore. Bigger, brighter, bolder.",
+                "Season 2 lifts off with live map, brand-new mods, and a fresh world to explore. Bigger, brighter, bolder.",
             imageUrl: "/seasons/season2.png",
             modpackOptions: [
                 { name: "Prism Launcher", url: "https://github.com/serverside-swzo/Brassworks-S2-Autoupdating/raw/refs/heads/master/Brassworks-S2-Autoupdating.zip" },
@@ -144,7 +144,7 @@ export function SeasonsSection() {
                         </button>
 
                         <h3 className="text-lg font-bold font-minecraft mb-4 text-zinc-800 dark:text-white">
-                            Download Modpack – {seasons[openIndex].title}
+                            Download Modpack - {seasons[openIndex].title}
                         </h3>
 
                         <ul className="flex flex-col gap-3 text-sm text-zinc-800 dark:text-zinc-100">
