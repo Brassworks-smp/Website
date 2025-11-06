@@ -25,10 +25,10 @@ export default function Home() {
       <SeasonsSection/>
         <GallerySlider
             items={[
-                { src: "/images/gallery/1.png?v=1", author: "Welcome to Season 2!" },
-                { src: "/images/gallery/2.png?v=1", author: "Nether Tomfoolery..." },
-                { src: "/images/gallery/3.png?v=1", author: "Steph_OVGU & Arturias_Yulind" },
-                { src: "/images/gallery/4.png?v=1", author: "187 Brassworksbande" }
+                { src: "/images/gallery/0.png?v=1", author: "Welcome to Season 2!" },
+                { src: "/images/gallery/1.png?v=1", author: "Nether Tomfoolery..." },
+                { src: "/images/gallery/2.png?v=1", author: "Steph_OVGU & Arturias_Yulind" },
+                { src: "/images/gallery/3.png?v=1", author: "187 Brassworksbande" }
             ]}
             autoPlay
             interval={5000}
