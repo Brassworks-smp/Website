@@ -68,17 +68,13 @@ export function FeaturesSection() {
                   key={idx}
                   data-idx={idx}
                   className={cn(
-                      "feature-item bg-card/60 p-6 transition-all duration-500 relative",
+                      "feature-item bg-card/60 p-6 border border-neutral-700 rounded-lg transition-all duration-500 relative",
                       visibleItems.includes(idx)
                           ? "opacity-100 translate-y-0"
                           : "opacity-0 translate-y-10"
                   )}
                   style={{transitionDelay: `${idx * 100}ms`}}
               >
-                  <div className="absolute top-0 right-0 z-10 h-1.5 w-3 bg-background"></div>
-                  <div className="absolute top-0 left-0 z-10 h-1.5 w-3 bg-background"></div>
-                  <div className="absolute bottom-0 right-0 z-10 h-1.5 w-3 bg-background"></div>
-                  <div className="absolute bottom-0 left-0 z-10 h-1.5 w-3 bg-background"></div>
                   <div className="h-12 w-12 bg-amber-400/60 flex items-center justify-center rounded-lg mb-5">
                       <feature.icon className="h-6 w-6 text-neutral-100"/>
                   </div>
