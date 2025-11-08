@@ -14,7 +14,7 @@ export function ModpackSection() {
         name: "New World",
         description:
             "Brassworks Season 2 lifts off with live map, brand-new mods, and a fresh world to explore. Bigger, brighter, bolder.",
-        imageUrl: "/images/gallery/0.png?v=1",
+        imageUrl: "/images/gallery/1.png?v=1",
         modpackOptions: [
             { name: "Prism Launcher", url: "https://github.com/serverside-swzo/Brassworks-S2-Autoupdating/raw/refs/heads/master/Brassworks-S2-Autoupdating.zip" },
             {
