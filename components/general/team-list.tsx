@@ -15,7 +15,7 @@ export function TeamList() {
           </p>
         </div>
 
-        <div className="mx-20 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="mx-30 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8">
           {getTeamMembers().map((member, idx) => {
             const Icon = roleIcons[member.role];
             return (
@@ -31,7 +31,7 @@ export function TeamList() {
                   <img
                     src={member.avatarUrl}
                     alt={member.name}
-                    className="w-full h-40 object-contain absolute bottom-0 left-0"
+                    className="object-cover inset-0 w-full h-full scale-[2] absolute top-[50%] left-0"
                   />
                   <div className="absolute inset-0 border-b-[4px]" />
                 </div>
