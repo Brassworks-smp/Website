@@ -30,12 +30,12 @@ export function HeroSection() {
 
         const loader = new THREE.CubeTextureLoader();
         scene.background = loader.load([
-            "/panorama/0.png",
-            "/panorama/2.png",
-            "/panorama/4.png",
-            "/panorama/5.png",
-            "/panorama/3.png",
-            "/panorama/1.png",
+            "/panorama/0.png?v=1",
+            "/panorama/2.png?v=1",
+            "/panorama/4.png?v=1",
+            "/panorama/5.png?v=1",
+            "/panorama/3.png?v=1",
+            "/panorama/1.png?v=1",
         ]);
 
         let frameId: number;
