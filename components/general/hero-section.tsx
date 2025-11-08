@@ -17,11 +17,14 @@ export function HeroSection() {
 
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(
-            75,
+            80,
             window.innerWidth / window.innerHeight,
             0.1,
             1000
         );
+        camera.position.set(0, 0, 0);
+        camera.rotation.set(0, 0, 0);
+
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(window.devicePixelRatio);
@@ -29,7 +32,7 @@ export function HeroSection() {
         mount.appendChild(renderer.domElement);
 
         const loader = new THREE.CubeTextureLoader();
-        scene.background = loader.load([
+        const texture = loader.load([
             "/panorama/0.png?v=1",
             "/panorama/2.png?v=1",
             "/panorama/4.png?v=1",
@@ -37,16 +40,22 @@ export function HeroSection() {
             "/panorama/3.png?v=1",
             "/panorama/1.png?v=1",
         ]);
+        scene.background = texture;
 
         let frameId: number;
+        let elapsed = 0;
+
         const animate = () => {
             frameId = requestAnimationFrame(animate);
+            elapsed += 0.016; // ~60 FPS
             camera.rotation.y -= 0.00035;
-            camera.rotation.x = Math.sin(Date.now() * 0.0001) * 0.02;
+            camera.rotation.x = Math.sin(elapsed * 0.04) * 0.02;
             renderer.render(scene, camera);
         };
+
         animate();
 
+        // Resize-Handling
         const handleResize = () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
@@ -54,11 +63,18 @@ export function HeroSection() {
         };
         window.addEventListener("resize", handleResize);
 
+        // Cleanup
         return () => {
             cancelAnimationFrame(frameId);
             window.removeEventListener("resize", handleResize);
-            mount.removeChild(renderer.domElement);
+            scene.clear();
+            texture.dispose();
             renderer.dispose();
+            THREE.Cache.clear();
+
+            if (mount.contains(renderer.domElement)) {
+                mount.removeChild(renderer.domElement);
+            }
         };
     }, []);
 
@@ -84,22 +100,22 @@ export function HeroSection() {
                 <Link target="_blank" href="https://discord.gg/neqEBnPVgY">
                     <div
                         className={`
-              mt-10 transition-all duration-700 ease-in-out
-              ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
-            `}
+                            mt-10 transition-all duration-700 ease-in-out
+                            ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
+                        `}
                     >
                         <Button
                             variant="default"
                             className={`
-                font-minecraft inline-flex items-center justify-center gap-x-2
-                px-5 py-3 h-12 text-lg ring-2 ring-inset
-                border-amber-600 bg-amber-500 text-white
-                shadow-[0_4px_theme(colors.amber.600)]
-                ring-amber-400
-                hover:translate-y-0.5 hover:bg-amber-400
-                hover:shadow-[0_2px_theme(colors.amber.500)]
-                hover:ring-amber-300
-              `}
+                                font-minecraft inline-flex items-center justify-center gap-x-2
+                                px-5 py-3 h-12 text-lg ring-2 ring-inset
+                                border-amber-600 bg-amber-500 text-white
+                                shadow-[0_4px_theme(colors.amber.600)]
+                                ring-amber-400
+                                hover:translate-y-0.5 hover:bg-amber-400
+                                hover:shadow-[0_2px_theme(colors.amber.500)]
+                                hover:ring-amber-300
+                            `}
                         >
                             Join Brassworks Now
                         </Button>
