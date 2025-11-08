@@ -34,31 +34,31 @@ let teamMembers: TeamMember[] = [
     name: "swzo",
     role: "owner",
     tag: "@iimillie",
-    avatarUrl: "/avatars/swzo.png?v=1",
+    avatarUrl: "/avatars/swzo.png?v=2",
   },
     {
     name: "Pipo",
     role: "owner",
     tag: "@pipo1660",
-    avatarUrl: "/avatars/pipo.png?v=1",
+    avatarUrl: "/avatars/pipo.png?v=2",
   },
     {
     name: "DerErneuerer",
     role: "administrator",
     tag: "@dererneuerer",
-    avatarUrl: "/avatars/dererneuerer.png?v=1",
+    avatarUrl: "/avatars/dererneuerer.png?v=2",
   },
     {
         name: "Float420",
         role: "administrator",
         tag: "@float420",
-        avatarUrl: "/avatars/float420.png?v=1",
+        avatarUrl: "/avatars/float420.png?v=2",
     },
     {
         name: "Extremely_Moist",
         role: "moderator",
         tag: "@hex_beans",
-        avatarUrl: "/avatars/extremely_moist.png?v=1",
+        avatarUrl: "/avatars/extremely_moist.png?v=2",
     }
 ];
 
