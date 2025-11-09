@@ -92,7 +92,7 @@ export function HeroSection() {
 
             <div className="container mx-auto mt-16 flex flex-col items-center gap-20 z-[2] relative">
                 <Image
-                    src="/images/seasons/season2"
+                    src="/images/seasons/season2.png"
                     width={100}
                     height={100}
                     alt="brassworks-season2"
