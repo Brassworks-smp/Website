@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import * as THREE from "three";
 import { Logo } from '@/components/logo';
+import Image from "next/image";
 
 export function HeroSection() {
     const [loaded, setLoaded] = useState(false);
@@ -90,7 +91,11 @@ export function HeroSection() {
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent z-[1]" />
 
             <div className="container mx-auto mt-16 flex flex-col items-center gap-20 z-[2] relative">
-                <Logo
+                <Image
+                    src="/images/seasons/season2"
+                    width={100}
+                    height={100}
+                    alt="brassworks-season2"
                     className={`w-auto h-40 object-contain transition-opacity duration-1000 ease-out ${
                         loaded ? "opacity-100" : "opacity-0"
                     }`}
