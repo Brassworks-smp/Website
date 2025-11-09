@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import * as THREE from "three";
+import { Logo } from '@/components/logo';
 
 export function HeroSection() {
     const [loaded, setLoaded] = useState(false);
@@ -33,12 +34,12 @@ export function HeroSection() {
 
         const loader = new THREE.CubeTextureLoader();
         const texture = loader.load([
-            "/panorama/0.png?v=1",
-            "/panorama/2.png?v=1",
-            "/panorama/4.png?v=1",
-            "/panorama/5.png?v=1",
-            "/panorama/3.png?v=1",
-            "/panorama/1.png?v=1",
+            "/images/panorama/panorama_0.png?v=2",
+            "/images/panorama/panorama_2.png?v=2",
+            "/images/panorama/panorama_4.png?v=2",
+            "/images/panorama/panorama_5.png?v=2",
+            "/images/panorama/panorama_3.png?v=2",
+            "/images/panorama/panorama_1.png?v=2",
         ]);
         scene.background = texture;
 
@@ -89,12 +90,10 @@ export function HeroSection() {
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent z-[1]" />
 
             <div className="container mx-auto mt-16 flex flex-col items-center gap-20 z-[2] relative">
-                <img
-                    src="/seasons/season2.png"
+                <Logo
                     className={`w-auto h-40 object-contain transition-opacity duration-1000 ease-out ${
                         loaded ? "opacity-100" : "opacity-0"
                     }`}
-                    alt="Brassworks Logo"
                 />
 
                 <Link target="_blank" href="https://discord.gg/neqEBnPVgY">

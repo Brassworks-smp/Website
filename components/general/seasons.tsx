@@ -15,7 +15,7 @@ export function SeasonsSection() {
             name: "The Beginning",
             description:
                 "Our very first season! Featuring classic Create contraptions, community builds, and the foundation of what Brassworks is today.",
-            imageUrl: "/seasons/season1.png",
+            imageUrl: "/images/seasons/season1.png",
             modpackOptions: [
                 { name: "Modrinth", url: "https://modrinth.com/modpack/brassworks-smp-modpack/version/1.2.9" },
             ],
@@ -26,7 +26,7 @@ export function SeasonsSection() {
             name: "New World",
             description:
                 "Season 2 lifts off with live map, brand-new mods, and a fresh world to explore. Bigger, brighter, bolder.",
-            imageUrl: "/seasons/season2.png",
+            imageUrl: "/images/seasons/season2.png",
             modpackOptions: [
                 { name: "Prism Launcher", url: "https://github.com/serverside-swzo/Brassworks-S2-Autoupdating/raw/refs/heads/master/Brassworks-S2-Autoupdating.zip" },
                 {

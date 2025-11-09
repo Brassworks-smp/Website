@@ -153,7 +153,7 @@ export function CommunitySection() {
                         >
                             <div className="relative w-full h-full overflow-hidden rounded-xl">
                                 <motion.img
-                                    src="images/logo.png"
+                                    src="images/icon.png"
                                     className="absolute inset-0 h-full object-cover"
                                     alt="Brassworks Logo"
                                 />
