@@ -28,10 +28,10 @@ export function SeasonsSection() {
                 "Season 2 lifts off with live map, brand-new mods, and a fresh world to explore. Bigger, brighter, bolder.",
             imageUrl: "/images/seasons/season2.png",
             modpackOptions: [
-                { name: "Prism Launcher", url: "https://github.com/serverside-swzo/Brassworks-S2-Autoupdating/raw/refs/heads/master/Brassworks-S2-Autoupdating.zip" },
+                { name: "Prism Launcher", url: "https://github.com/serverside-swzo/Brassworks-S2-Autoupdating" },
                 {
                     name: "Modrinth",
-                    url: "https://modrinth.com/modpack/brassworks-smp-modpack/version/2.0.0",
+                    url: "https://modrinth.com/modpack/brassworks-smp-modpack",
                 },
             ],
             mapUrl: null,

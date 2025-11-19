@@ -191,7 +191,7 @@ export function GallerySlider({
                                 }`}
                                 aria-label={`Go to slide ${i + 1}`}
                                 tabIndex={0}
-                            />
+                            /> 
                         ))}
                     </div>
                 </div>

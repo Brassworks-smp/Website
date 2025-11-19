@@ -16,10 +16,10 @@ export function ModpackSection() {
             "Brassworks Season 2 lifts off with live map, brand-new mods, and a fresh world to explore. Bigger, brighter, bolder.",
         imageUrl: "/images/gallery/1.png?v=2",
         modpackOptions: [
-            { name: "Prism Launcher", url: "https://github.com/serverside-swzo/Brassworks-S2-Autoupdating/raw/refs/heads/master/Brassworks-S2-Autoupdating.zip" },
+            { name: "Prism Launcher", url: "https://github.com/serverside-swzo/Brassworks-S2-Autoupdating" },
             {
                 name: "Modrinth",
-                url: "https://modrinth.com/modpack/brassworks-smp-modpack/version/2.0.0",
+                url: "https://modrinth.com/modpack/brassworks-smp-modpack",
             },
         ],
     };
@@ -66,20 +66,28 @@ export function ModpackSection() {
                                 <strong className="text-zinc-100">Using Prism Launcher</strong>:<br />
                                 Download Prism Launcher from{" "}
                                 <Link
-                                    href="https://github.com/serverside-swzo/Brassworks-S2-Autoupdating/raw/refs/heads/master/Brassworks-S2-Autoupdating.zip"
+                                    href="https://prismlauncher.org/"
                                     target="_blank"
                                     className="text-amber-400 underline hover:text-amber-300"
                                     rel="noopener noreferrer"
                                 >
                                     here
                                 </Link>
-                                , then add the Brassworks Season 2 modpack via its Modrinth ID or URL inside the launcher.
+                                , then add the Brassworks Season 2 modpack via the{" "}
+                                <Link 
+                                    href="https://github.com/serverside-swzo/Brassworks-S2-Autoupdating"
+                                    target="_blank"
+                                    className="text-amber-400 underline hover:text-amber-300"
+                                    rel="noopener noreferrer"
+                                > 
+                                    Auto-Updater ZIP
+                                </Link> inside the launcher.
                             </li>
                             <li>
                                 <strong className="text-zinc-100">Using Modrinth</strong>:<br />
                                 Visit the{" "}
                                 <Link
-                                    href="https://modrinth.com/modpack/brassworks-smp-modpack/version/2.0.0"
+                                    href="https://modrinth.com/modpack/brassworks-smp-modpack"
                                     target="_blank"
                                     className="text-amber-400 underline hover:text-amber-300"
                                     rel="noopener noreferrer"
