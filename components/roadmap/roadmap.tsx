@@ -142,7 +142,7 @@ export default function Roadmap() {
         </div>
 
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 overflow-x-auto pb-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 pb-4">
             {statusGroups.map((group) => {
               const categories = Array.from(
                 new Set(group.tasks.map((t) => t.category ?? "Uncategorized"))
@@ -157,7 +157,7 @@ export default function Roadmap() {
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-3 px-3 py-3 lg:max-h-[60vh] bg-card rounded-b-md overflow-y-auto">
+                  <div className="flex flex-col gap-3 px-3 py-3 lg:max-h-[60vh] bg-card rounded-b-md overflow-y-auto" style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}>
                     {categories.map((cat) => {
                       const tasksByCategory = group.tasks.filter((t) => t.category === cat);
                       const key = `${group.status}-${cat}`;

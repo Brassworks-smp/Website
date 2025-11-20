@@ -101,13 +101,13 @@ export function HeroSection() {
                     }`}
                 />
 
-                <Link target="_blank" href="https://discord.gg/neqEBnPVgY">
-                    <div
-                        className={`
-                            mt-2 transition-all duration-700 ease-in-out grid grid-cols-1 gap-4
-                            ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
-                        `}
-                    >
+                <div
+                    className={`
+                        mt-2 transition-all duration-700 ease-in-out grid grid-cols-1 gap-4
+                        ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
+                    `}
+                >
+                    <Link target="_blank" href="https://discord.gg/neqEBnPVgY">
                         <Button
                             variant="default"
                             className={`
@@ -123,25 +123,25 @@ export function HeroSection() {
                         >
                             Join Brassworks Now
                         </Button>
-                        <Link className="mx-auto w-[60%]" href="/roadmap">
-                            <Button
-                                variant="default"
-                                className={`
-                                    font-minecraft inline-flex items-center justify-center w-[100%] gap-x-2
-                                    px-5 py-3 h-8 text-sm ring-2 ring-inset
-                                    border-violet-600 bg-violet-500 text-white
-                                    shadow-[0_4px_theme(colors.violet.600)]
-                                    ring-violet-400
-                                    hover:translate-y-0.5 hover:bg-violet-400
-                                    hover:shadow-[0_2px_theme(colors.violet.500)]
-                                    hover:ring-violet-300
-                                `}
-                            >
-                                Roadmap
-                            </Button>
-                        </Link>
-                    </div>
-                </Link>
+                    </Link>
+                    <Link className="mx-auto w-[60%]" href="/roadmap">
+                        <Button
+                            variant="default"
+                            className={`
+                                font-minecraft inline-flex items-center justify-center w-[100%] gap-x-2
+                                px-5 py-3 h-8 text-sm ring-2 ring-inset
+                                border-violet-600 bg-violet-500 text-white
+                                shadow-[0_4px_theme(colors.violet.600)]
+                                ring-violet-400
+                                hover:translate-y-0.5 hover:bg-violet-400
+                                hover:shadow-[0_2px_theme(colors.violet.500)]
+                                hover:ring-violet-300
+                            `}
+                        >
+                            Roadmap
+                        </Button>
+                    </Link>
+                </div>
             </div>
         </section>
     );
