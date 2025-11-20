@@ -135,21 +135,21 @@ export default function Roadmap() {
 
   return (
     <section className="bg-cover bg-[url(/images/background.png)]">
-      <div className="min-h-[90vh] container mx-auto px-3 sm:px-4 py-8 sm:py-12 mt-12 sm:mt-16">
+      <div className="min-h-[90vh] container mx-auto px-3 sm:px-4 py-8 sm:py-12 mt-16">
         <div className="mx-auto text-center mb-10">
           <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Modpack Roadmap</p>
           <h2 className="text-3xl md:text-4xl font-bold font-minecraft">Version {currentVersion}</h2>
         </div>
 
         <div className="max-w-6xl mx-auto">
-          <div className="flex gap-4 overflow-x-auto pb-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 overflow-x-auto pb-4">
             {statusGroups.map((group) => {
               const categories = Array.from(
                 new Set(group.tasks.map((t) => t.category ?? "Uncategorized"))
               );
 
               return (
-                <div key={group.status} className="w-[85vw] sm:w-auto sm:min-w-[260px] sm:max-w-sm flex-shrink-0 sm:flex-1 rounded-md flex flex-col">
+                <div key={group.status} className="w-auto flex-shrink-0 rounded-md flex flex-col">
                   <div className="flex items-center justify-between px-3 py-2 border-b-2 rounded-t-md border-stone-800 bg-stone-900/70">
                     <div className="flex items-center gap-2">
                       <h3 className="text-sm text-stone-100 font-bold">{group.status}</h3>
@@ -157,7 +157,7 @@ export default function Roadmap() {
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-3 px-3 py-3 max-h-[60vh] bg-card rounded-b-md overflow-y-auto">
+                  <div className="flex flex-col gap-3 px-3 py-3 lg:max-h-[60vh] bg-card rounded-b-md overflow-y-auto">
                     {categories.map((cat) => {
                       const tasksByCategory = group.tasks.filter((t) => t.category === cat);
                       const key = `${group.status}-${cat}`;
@@ -179,12 +179,12 @@ export default function Roadmap() {
 
                           {!isCollapsed && (
                             <div className="flex flex-col gap-2 px-2.5 py-2">
-                              {tasksByCategory.map((task) => (
+                              {tasksByCategory.map((task, index) => (
                                 <div
-                                  key={`${group.status}-${cat}-${task.id}`}
+                                  key={`${group.status}-${cat}-${task.id ?? index}`}
                                   className="relative flex flex-col gap-2 p-3 rounded-md border border-stone-800 bg-card hover:border-stone-600 hover:bg-stone-900/70 transition-all duration-200"
                                 >
-                                  <div className="text-sm text-white break-words">{task.title}</div>
+                                  <div className="text-sm text-white break-words">{task.title} <small className="text-stone-500">#{task.id}</small></div>
                                   {task.description && (
                                     <div className="text-xs mb-1.5 text-stone-300 break-words">{task.description}</div>
                                   )}
