@@ -46,6 +46,7 @@ export function Footer() {
           <div>
             <h3 className="font-medium mb-4">Modpack</h3>
             <ul className="space-y-2">
+              <li><Link href="/roadmap" className="text-muted-foreground hover:text-foreground transition">Roadmap</Link></li>
               <li><Link href="/#modpack" className="text-muted-foreground hover:text-foreground transition">Download</Link></li>
             </ul>
           </div>
