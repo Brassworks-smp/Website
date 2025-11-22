@@ -124,7 +124,7 @@ export function HeroSection() {
                             Join Brassworks Now
                         </Button>
                     </Link>
-                    <Link className="mx-auto w-[60%]" href="/roadmap">
+                    <Link className="mx-auto w-[60%]" target="_blank" href="https://ko-fi.com/brassworks">
                         <Button
                             variant="default"
                             className={`
@@ -138,7 +138,7 @@ export function HeroSection() {
                                 hover:ring-violet-300
                             `}
                         >
-                            Roadmap
+                            Support Us
                         </Button>
                     </Link>
                 </div>
