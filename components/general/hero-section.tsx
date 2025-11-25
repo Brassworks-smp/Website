@@ -103,7 +103,7 @@ export function HeroSection() {
 
                 <div
                     className={`
-                        mt-2 transition-all duration-700 ease-in-out grid grid-cols-1 gap-4
+                        mt-2 transition-all duration-500 ease-in-out
                         ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
                     `}
                 >
@@ -124,12 +124,19 @@ export function HeroSection() {
                             Join Brassworks Now
                         </Button>
                     </Link>
-                    <Link className="mx-auto w-[60%]" target="_blank" href="https://ko-fi.com/brassworks">
+                </div>
+                <div
+                    className={`
+                        transition-all duration-700 ease-in-out mt-[-4rem]
+                        ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
+                    `}
+                >
+                    <Link target="_blank" href="https://ko-fi.com/brassworks">
                         <Button
                             variant="default"
                             className={`
                                 font-minecraft inline-flex items-center justify-center w-[100%] gap-x-2
-                                px-5 py-3 h-8 text-sm ring-2 ring-inset
+                                px-8 py-3 h-8 text-sm ring-2 ring-inset
                                 border-violet-600 bg-violet-500 text-white
                                 shadow-[0_4px_theme(colors.violet.600)]
                                 ring-violet-400

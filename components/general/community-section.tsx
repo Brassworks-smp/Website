@@ -100,10 +100,10 @@ export function CommunitySection() {
                                 <div
                                     key={i}
                                     className={` border border-neutral-700
-                    relative rounded-xl bg-white px-6 py-6 flex flex-col
+                    relative rounded-lg bg-white px-6 py-6 flex flex-col
                     shadow-[0px_0px_0px_1px_rgba(9,9,11,0.07),0px_2px_2px_0px_rgba(9,9,11,0.05)]
                     dark:bg-zinc-900 dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
-                    dark:before:pointer-events-none dark:before:absolute dark:before:-inset-px dark:before:rounded-xl 
+                    dark:before:pointer-events-none dark:before:absolute dark:before:-inset-px dark:before:rounded-lg 
                     dark:before:shadow-[0px_2px_8px_0px_rgba(0,0,0,0.20),0px_1px_0px_0px_rgba(255,255,255,0.06)_inset]
                   `}
                                 >
@@ -144,10 +144,10 @@ export function CommunitySection() {
                         )}
                         <div
                             className={` border border-neutral-700 flex-1
-                    relative rounded-xl bg-white px-6 py-6
+                    relative rounded-lg bg-white px-6 py-6
                     shadow-[0px_0px_0px_1px_rgba(9,9,11,0.07),0px_2px_2px_0px_rgba(9,9,11,0.05)]
                     dark:bg-zinc-900 dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
-                    dark:before:pointer-events-none dark:before:absolute dark:before:-inset-px dark:before:rounded-xl 
+                    dark:before:pointer-events-none dark:before:absolute dark:before:-inset-px dark:before:rounded-lg 
                     dark:before:shadow-[0px_2px_8px_0px_rgba(0,0,0,0.20),0px_1px_0px_0px_rgba(255,255,255,0.06)_inset]
                   `}
                         >
@@ -162,7 +162,7 @@ export function CommunitySection() {
                                         <span className="text-base font-medium">
                                             Server Status
                                         </span>
-                                        <span className={`ml-1.5 px-1.5 py-0.5 rounded-xl ${status.online ? "bg-emerald-500" : "bg-rose-600"}  text-xs`}>{status.online ? "online" : "offline"}</span>
+                                        <span className={`ml-1.5 px-1.5 py-0.5 rounded-lg ${status.online ? "bg-emerald-500" : "bg-rose-600"}  text-xs`}>{status.online ? "online" : "offline"}</span>
                                     </div>
                                     <div className="bg-gray-500 rounded-l-lg w-4 h-0.5 mt-2.5 mb-2">
                                     </div>
@@ -174,7 +174,7 @@ export function CommunitySection() {
                         </div>
                     </div>
 
-                    <div className="w-full h-[500px] rounded-xl overflow-hidden shadow-lg border border-neutral-700">
+                    <div className="w-full h-[500px] rounded-lg overflow-hidden shadow-lg border border-neutral-700">
                         <iframe
                             src="https://discord.com/widget?id=1346614274415398975&theme=dark"
                             width="100%"

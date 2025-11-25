@@ -117,22 +117,8 @@ export function GallerySlider({
       `}</style>
 
             {bgStripe}
-
             <div className="container mx-auto px-4">
-                <motion.div
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4 }}
-                    className="w-full flex justify-center mb-6"
-                >
-          <span className="font-minecraft text-3xl md:text-4xl text-white inline-block px-6 md:px-8 py-2 md:py-3 rounded-lg bg-zinc-900/80 border border-zinc-800 shadow-[0_2px_12px_rgba(0,0,0,0.45)]">
-            Gallery
-          </span>
-                </motion.div>
-            </div>
-
-            <div className="container mx-auto px-4">
-                <div className="relative rounded-xl border border-zinc-800 bg-zinc-900/40 backdrop-blur-sm shadow-[0px_0px_0px_1px_rgba(255,255,255,0.04),0_10px_26px_rgba(0,0,0,0.32)] overflow-hidden">
+                <div className="relative overflow-hidden">
                     <div
                         ref={trackRef}
                         className="w-full min-h-[160px] md:min-h-[260px] overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex scroll-smooth no-scrollbar"
@@ -147,10 +133,8 @@ export function GallerySlider({
                                 aria-roledescription="slide"
                                 aria-label={`${i + 1} of ${items.length}`}
                             >
-                                <div className="relative w-[86%] max-w-4xl aspect-[16/9] rounded-lg overflow-hidden border border-zinc-800 shadow-2xl">
+                                <div className="relative w-[86%] max-w-5xl aspect-[18/9] rounded-lg overflow-hidden border border-zinc-800 shadow-2xl">
                                     <motion.img
-                                        initial={{ opacity: 0.2, scale: 0.985 }}
-                                        animate={{ opacity: active === i ? 1 : 0.8, scale: active === i ? 1 : 0.992 }}
                                         transition={{ duration: 0.3 }}
                                         src={item.src}
                                         alt={item.alt ?? `slide ${i + 1}`}
@@ -184,7 +168,7 @@ export function GallerySlider({
                                         goTo(i);
                                     }
                                 }}
-                                className={`h-2.5 w-2.5 rounded-full transition-all duration-300 border border-zinc-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60 ${
+                                className={`h-3 w-3 rounded-full transition-all duration-300 border-2 border-zinc-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60 ${
                                     active === i
                                         ? "scale-125 bg-amber-400 shadow-[0_0_0_4px_rgba(251,191,36,0.15)]"
                                         : "bg-zinc-700/40"

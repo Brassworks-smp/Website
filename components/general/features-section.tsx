@@ -68,14 +68,14 @@ export function FeaturesSection() {
                   key={idx}
                   data-idx={idx}
                   className={cn(
-                      "feature-item bg-card/60 p-6 border border-neutral-700 rounded-lg transition-all duration-500 relative",
+                      "feature-item bg-card/40 p-6 border border-neutral-700 rounded-lg transition-all duration-500 relative",
                       visibleItems.includes(idx)
                           ? "opacity-100 translate-y-0"
                           : "opacity-0 translate-y-10"
                   )}
                   style={{transitionDelay: `${idx * 100}ms`}}
               >
-                  <div className="h-12 w-12 bg-amber-400/60 flex items-center justify-center rounded-lg mb-5">
+                  <div className="h-11 w-12 text-white bg-amber-500 border border-amber-600 ring-2 ring-inset ring-amber-400 shadow-[0_3px_theme(colors.amber.700)] flex items-center justify-center rounded-lg mb-5">
                       <feature.icon className="h-6 w-6 text-neutral-100"/>
                   </div>
                   <h3 className="font-bold font-minecraft text-xl mb-3">{feature.title}</h3>
