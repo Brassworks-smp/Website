@@ -30,7 +30,8 @@ export default function Home() {
                 { src: "/images/gallery/3.png?v=2", author: "Steph_OVGU & Arturias_Yulind" },
                 { src: "/images/gallery/4.png?v=2", author: "187 Brassworksbande" },
                 { src: "/images/gallery/5.png?v=2", author: "Hang Gang" },
-                { src: "/images/gallery/6.png?v=2", author: "Ever growing Family.." }
+                { src: "/images/gallery/6.png?v=2", author: "Ever growing Family.." },
+                { src: "/images/gallery/7.png?v=2", author: "Winter is here!" }
             ]}
             autoPlay
             interval={5000}
