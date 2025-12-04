@@ -14,5 +14,5 @@ export const metadata = {
 };
 
 export default function DiscordPage() {
-  redirect("https://discord.com/invite/neqEBnPVgY");
+  redirect("https://discord.com/invite/nDhkgzAPR2");
 }
