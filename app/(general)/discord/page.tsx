@@ -1,10 +1,10 @@
-import { redirect } from "next/navigation";
+import { DiscordRedirect } from "@/components/general/discordredirect";
 
 export const metadata = {
   title: 'Brassworks - Discord',
   description:
     'Join the Brassworks community on Discord - connect with players, get updates, and stay informed about our SMP world.',
-  other: {
+  other: { 
     'og:title': "Brassworks - Discord",
     'og:description': "Join the Brassworks community on Discord - connect with players, get updates, and stay informed about our SMP world.",
     'og:url': "https://brassworks.opnsoc.org/discord",
@@ -14,5 +14,7 @@ export const metadata = {
 };
 
 export default function DiscordPage() {
-  redirect("https://discord.com/invite/nDhkgzAPR2");
+  return (
+    <DiscordRedirect/>
+  );
 }
