@@ -35,12 +35,12 @@ export function HeroSection() {
 
         const loader = new THREE.CubeTextureLoader();
         const texture = loader.load([
-            "/images/panorama/panorama_0.png?v=3",
-            "/images/panorama/panorama_2.png?v=3",
-            "/images/panorama/panorama_4.png?v=3",
-            "/images/panorama/panorama_5.png?v=3",
-            "/images/panorama/panorama_3.png?v=3",
-            "/images/panorama/panorama_1.png?v=3",
+            "/images/panorama/panorama_0.png?v=4",
+            "/images/panorama/panorama_2.png?v=4",
+            "/images/panorama/panorama_4.png?v=4",
+            "/images/panorama/panorama_5.png?v=4",
+            "/images/panorama/panorama_3.png?v=4",
+            "/images/panorama/panorama_1.png?v=4",
         ]);
         scene.background = texture;
 
@@ -92,7 +92,7 @@ export function HeroSection() {
 
             <div className="container mx-auto mt-16 flex flex-col items-center gap-20 z-[2] relative">
                 <Image
-                    src="/images/winterlogo.png"
+                    src="/images/seasons/season2.png"
                     width={100}
                     height={100}
                     alt="brassworks-season2"
@@ -113,12 +113,12 @@ export function HeroSection() {
                             className={`
                                 font-minecraft inline-flex items-center justify-center gap-x-2
                                 px-5 py-3 h-12 text-lg ring-2 ring-inset
-                                border-cyan-600 bg-cyan-500 text-white
-                                shadow-[0_4px_theme(colors.cyan.600)]
-                                ring-cyan-400
-                                hover:translate-y-0.5 hover:bg-cyan-400
-                                hover:shadow-[0_2px_theme(colors.cyan.500)]
-                                hover:ring-cyan-300
+                                border-amber-600 bg-amber-500 text-white
+                                shadow-[0_4px_theme(colors.amber.600)]
+                                ring-amber-400
+                                hover:translate-y-0.5 hover:bg-amber-400
+                                hover:shadow-[0_2px_theme(colors.amber.500)]
+                                hover:ring-amber-300
                             `}
                         >
                             Join Brassworks Now
