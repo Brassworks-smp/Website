@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import * as THREE from "three";
-import { Logo } from '@/components/logo';
 import Image from "next/image";
 
 export function HeroSection() {
