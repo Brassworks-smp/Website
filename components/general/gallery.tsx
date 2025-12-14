@@ -126,7 +126,7 @@ export function GallerySlider({
                         {items.map((item, i) => (
                             <div
                                 key={i}
-                                ref={(n) => (slideRefs.current[i] = n)}
+                                ref={(n) => void (slideRefs.current[i] = n)}
                                 data-idx={i}
                                 className="relative shrink-0 snap-center w-full flex items-center justify-center py-5"
                                 role="group"
