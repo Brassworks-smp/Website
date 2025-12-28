@@ -14,7 +14,7 @@ export const metadata = {
 export default function Map() {
   return (
     <section className="relative mt-16 justify-center overflow-hidden">
-        <iframe src="https://brassmap.572.at/" width="100%" className="min-h-[93vh] h-screen">
+        <iframe src="https://brassmap.opnsoc.org/" width="100%" className="min-h-[93vh] h-screen">
         </iframe>
     </section>
   );
