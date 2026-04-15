@@ -20,23 +20,19 @@ html {
   font-family: 'minecraft';
   src: url('/fonts/MinecraftRegular.woff2') format('woff2');
   font-weight: normal;
-  font-style: normal;
 }
 
 @font-face {
   font-family: 'minecraft';
   src: url('/fonts/MinecraftBold.woff2') format('woff2');
-  font-weight: normal;
-  font-style: bold;
+  font-weight: bold;
 }
 
 @font-face {
   font-family: 'minecraft';
   src: url('/fonts/MinecraftItalic.woff2') format('woff2');
-  font-weight: normal;
   font-style: italic;
 }
-
 
 @layer base {
   :root {
@@ -89,6 +85,39 @@ html {
 
 .container {
   @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.container2 {
+  @apply max-w-[110rem] mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.schem-bg {
+  opacity: 0.8;
+
+  background-image:
+          linear-gradient(hsl(var(--foreground) / 0.15) 3px, transparent 3px),
+          linear-gradient(90deg, hsl(var(--foreground) / 0.15) 3px, transparent 3px),
+          linear-gradient(hsl(var(--foreground) / 0.08) 1.5px, transparent 1.5px),
+          linear-gradient(90deg, hsl(var(--foreground) / 0.08) 1.5px, transparent 1.5px);
+
+  background-size:
+          100px 100px,
+          100px 100px,
+          20px 20px,
+          20px 20px;
+
+  background-position:
+          -4px -4px,
+          -4px -4px,
+          -2px -2px,
+          -2px -2px;
+
+  background-color: hsl(var(--background));
+}
+
+.pixelated {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
 
 .slider {

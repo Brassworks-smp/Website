@@ -10,10 +10,10 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
           <div className="col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <Logo className="h-9 w-auto" />
+              <Logo className="h-9 w-auto pixelated" />
             </Link>
             <p className="text-muted-foreground max-w-xs">
-              Our public server thrives on cooperation between players - express your creativity freely, with each other.
+              Brassworks isn't just another Create SMP - it's a carefully crafted experience built for everyone.
             </p>
             <div className="flex gap-4 mt-6">
               <Link target="_blank" href="https://discord.gg/neqEBnPVgY" className="text-muted-foreground hover:text-foreground transition">
@@ -61,7 +61,7 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-muted flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-              © 2025 Brassworks. This website is open-source under the Apache 2.0 License.
+            © 2026 Brassworks. This website is open-source under the Apache 2.0 License. <br/> <small className="text-gray-5  00">NOT AN OFFICIAL MINECRAFT SERVICE. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.</small>
           </p>
         </div>
       </div>

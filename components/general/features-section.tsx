@@ -1,89 +1,127 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { 
-  HandCoins,
-  Wrench,
-  ServerCog,
-  Handshake
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
+import * as React from "react";
+import { useState } from "react";
 
 const features = [
   {
-    icon: HandCoins,
-    title: "Economy System",
-    description: "Earn currency through quests, trading, and various in-game activities. A dynamic system designed to reward your efforts."
+    image: "/images/showcase/community-family.png?v=1",
+    title: "A Community Like Family",
+    description:
+        "A highly active, welcoming, and beginner-friendly community where everyone supports each other. You're never just a player - you're part of something bigger.",
   },
   {
-    icon: Wrench,
-    title: "Fully Customized",
-    description: "A carefully crafted custom modpack, finely tuned with love for a unique gameplay experience."
+    image: "/images/showcase/custom-features.png?v=1",
+    title: "Exclusive Custom Features",
+    description:
+        "Unique systems and mechanics developed specifically for our server, designed to enhance your gameplay experience in meaningful and exciting ways.",
   },
   {
-    icon: ServerCog,
-    title: "High-End Server",
-    description: "A high-performance server built for stability and speed - always pushing to deliver the best experience possible."
+    image: "/images/showcase/constantly-evolving.png?v=1",
+    title: "Constantly Evolving",
+    description:
+        "Regular updates, new content, and continuous improvements ensure the server always feels fresh and exciting to explore.",
   },
   {
-    icon: Handshake,
-    title: "Amazing Community",
-    description: "Join parties, trade with others, or start your own project. It's the players who bring Brasswork's world to life."
-  }
+    image: "/images/showcase/community-driven.png?v=1",
+    title: "Player-Driven World",
+    description:
+        "From massive builds to thriving markets, the world is shaped by its players - your ideas and creations truly matter.",
+  },
 ];
 
 export function FeaturesSection() {
-  const [visibleItems, setVisibleItems] = useState<number[]>([]);
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [fade, setFade] = React.useState(true);
+  const [animateSniffer, setAnimateSniffer] = useState(true);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const idx = parseInt(entry.target.getAttribute('data-idx') || '0');
-          setVisibleItems(prev => [...prev, idx]);
-        }
-      });
-    }, { threshold: 0.1 });
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setFade(false);
+      setAnimateSniffer(false);
 
-    document.querySelectorAll('.feature-item').forEach(item => {
-      observer.observe(item);
-    });
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % features.length);
+        setFade(true);
 
-    return () => observer.disconnect();
+        setAnimateSniffer(true);
+      }, 500);
+    }, 8000);
+
+    return () => clearInterval(interval);
   }, []);
 
+  const feature = features[currentIndex];
+
   return (
-    <section className="pb-4 pt-36" id="our-server">
-      <div className="container">
+      <section className="pb-4 pt-36 relative overflow-hidden bg-gradient-to-t from-background via-background/70 to-transparent">
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl mb-4 uppercase font-bold font-minecraft">A cooperative Minecraft server</h2>
+          <h2 className="text-3xl md:text-4xl mb-4 uppercase font-bold font-minecraft">
+            A cooperative Minecraft experience
+          </h2>
           <p className="text-muted-foreground text-lg max-w-4xl">
-            Our public server thrives on cooperation between players - express your creativity freely, with each other.
+            Build, trade and create together in a fully customized world with quests, economy, and reliability at it's core.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, idx) => (
-              <div
-                  key={idx}
-                  data-idx={idx}
-                  className={cn(
-                      "feature-item bg-card/40 p-6 border border-neutral-700 rounded-lg transition-all duration-500 relative",
-                      visibleItems.includes(idx)
-                          ? "opacity-100 translate-y-0"
-                          : "opacity-0 translate-y-10"
-                  )}
-                  style={{transitionDelay: `${idx * 100}ms`}}
-              >
-                  <div className="h-11 w-12 text-white bg-amber-500 border border-amber-600 ring-2 ring-inset ring-amber-400 shadow-[0_3px_theme(colors.amber.700)] flex items-center justify-center rounded-lg mb-5">
-                      <feature.icon className="h-6 w-6 text-neutral-100"/>
-                  </div>
-                  <h3 className="font-bold font-minecraft text-xl mb-3">{feature.title}</h3>
-                  <p className="text-muted-foreground">{feature.description}</p>
-              </div>
-          ))}
+        <div className="max-w-7xl px-8 mx-auto relative flex grid grid-cols-2 gap-12 z-10 overflow-hidden">
+          <div
+              className={`w-full h-80 rounded-lg border border-neutral-700 overflow-hidden transition-all duration-700 transform ${
+                  fade
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 -translate-x-10"
+              }`}
+          >
+            <img
+                key={feature.image}
+                src={feature.image}
+                alt={feature.title}
+                className="w-full h-full object-cover"
+            />
+          </div>
+
+          <div
+              className={`max-w-4xl transition-all duration-700 transform ${
+                  fade
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 -translate-y-10"
+              }`}
+          >
+            <p className="text-2xl mb-2 uppercase font-bold font-minecraft">
+              {feature.title}
+            </p>
+            <p className="text-muted-foreground text-lg max-w-4xl">
+              {feature.description}
+            </p>
+          </div>
+
+          <img
+              src="/images/showcase/scroll/sniffer.gif"
+              alt="Sniffer"
+              className={`pointer-events-none absolute pixelated bottom-[-0.35rem] w-16 transition-all ease-linear ${
+                  animateSniffer
+                      ? "left-1/2 translate-x-[-50%] opacity-100 animate-sniffer-move"
+                      : "left-full opacity-0"
+              }`}
+          />
         </div>
-      </div>
-    </section>
+
+        <style jsx>{`
+        @keyframes snifferMove {
+          0% {
+            left: 53%;
+            transform: translateX(-50%);
+          }
+          100% {
+            left: 100%;
+            transform: translateX(-100%);
+          }
+        }
+
+        .animate-sniffer-move {
+          animation: snifferMove 8s linear forwards;
+        }
+      `}</style>
+      </section>
   );
 }

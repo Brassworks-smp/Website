@@ -1,144 +1,76 @@
 "use client";
 
-import * as React from 'react';
-import Link from 'next/link';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu } from 'lucide-react';
-import { Logo } from '@/components/logo';
+import * as React from "react";
+import Link from "next/link";
+import Image from "next/image";
+
+// @ts-ignore
+function HoverImage({ src, hoverSrc, alt, href }) {
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  const image = (
+      <Image
+          src={isHovered ? hoverSrc : src}
+          alt={alt}
+          width={24}
+          height={24}
+          className="pixelated transition-all duration-250 ease-out"
+          style={{
+            transform: isHovered ? "scale(0.91)" : "scale(1)",
+            cursor: "pointer",
+          }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+      />
+  );
+
+  if (href) {
+    return (
+        <Link href={href} target="_blank">
+          {image}
+        </Link>
+    );
+  }
+
+  return image;
+}
 
 export function Header() {
   return (
-    <>
-      <header className="fixed top-0 z-50 w-full transition-colors duration-300 bg-card/50 backdrop-blur supports-[backdrop-filter]:bg-card/50 border-b">
-        <div className="container flex h-16 items-center justify-between">
+      <header className="top-0 z-50 w-full transition-colors duration-300 bg-card border-b-2 border-b-gray-200/10">
+        <div className="container2 flex h-10 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <Logo className="h-11 w-auto" />
+            <Image src="/images/icon.png" alt="icon" width={28} height={28} />
+            <p className="text-sm  text-gray-300 font-minecraft tracking-widest">BRASSWORKS</p>
           </Link>
 
-          <div className="hidden md:flex">
-            <NavigationMenu>
-              <NavigationMenuList className="gap-5">
-                  <NavigationMenuItem>
-                    <NavigationMenuLink asChild>
-                        <Link href="/#our-server" className={navigationMenuTriggerStyle()}>
-                            Our Server
-                        </Link>
-                    </NavigationMenuLink>
-                </NavigationMenuItem>
-                  <NavigationMenuItem>
-                      <NavigationMenuLink asChild>
-                          <Link href="/#gallery" className={navigationMenuTriggerStyle()}>
-                              Gallery
-                          </Link>
-                      </NavigationMenuLink>
-                  </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink asChild>
-                    <Link href="https://brassworks.opnsoc.org/map" className={navigationMenuTriggerStyle()}>
-                      Live Map
-                    </Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink asChild>
-                      <Link href="/roadmap" className={navigationMenuTriggerStyle()}>
-                          Roadmap
-                      </Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
-          </div>
-
-          <div className="items-center hidden md:flex ml-20">
-            <Link target="_blank" href="https://discord.gg/neqEBnPVgY">
-              <Button variant="default" className="font-minecraft relative mb-1 inline-flex items-center justify-center gap-x-2
-                px-3.5 py-1.5 text-sm ring-2 ring-inset
-                border-amber-600 bg-amber-500 text-white
-                shadow-[0_4px_theme(colors.amber.600)]
-                ring-amber-400
-                hover:translate-y-0.5 hover:bg-amber-400
-                hover:shadow-[0_2px_theme(colors.amber.500)]
-                hover:ring-amber-300
-                forced-colors:[--btn-icon:ButtonText]
-                forced-colors:data-hover:[--btn-icon:ButtonText]">
-                Play Now
-              </Button>
-            </Link>
-          </div>
-
-          <div className="md:hidden">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Menu className="h-6 w-6" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-[80%] sm:w-[385px]">
-                <nav className="flex flex-col gap-4 mt-8">
-                  <Link href="https://brassworks.opnsoc.org/map" className="px-2 py-1 rounded-md hover:bg-muted">
-                    Live Map
-                  </Link>
-                  <Link href="/roadmap" className="px-2 py-1 rounded-md hover:bg-muted">
-                    Roadmap
-                  </Link>
-                  <div className="flex flex-col gap-2 mt-4">
-                    <Link href="/play-now">
-                      <Button variant="default" className="font-minecraft relative mb-1 inline-flex items-center justify-center gap-x-2
-                        px-3.5 py-1.5 text-sm ring-2 ring-inset
-                        border-amber-600 bg-amber-500 text-white
-                        shadow-[0_4px_theme(colors.amber.600)]
-                        ring-amber-400
-                        hover:translate-y-0.5 hover:bg-amber-400
-                        hover:shadow-[0_2px_theme(colors.amber.500)]
-                        hover:ring-amber-300
-                        forced-colors:[--btn-icon:ButtonText]
-                        forced-colors:data-hover:[--btn-icon:ButtonText]">
-                        Play Now
-                      </Button>
-                    </Link>
-                  </div>
-                </nav>
-              </SheetContent>
-            </Sheet>
+          <div className="py-1 flex items-center gap-3">
+            <HoverImage
+                src="/images/icons/kofi.png"
+                hoverSrc="/images/icons/kofi-hover.png"
+                alt="kofi"
+                href="https://ko-fi.com/brassworks"
+            />
+            <HoverImage
+                src="/images/icons/discord.png"
+                hoverSrc="/images/icons/discord-hover.png"
+                alt="discord"
+                href="https://brassworks.opnsoc.org/discord"
+            />
+            <HoverImage
+                src="/images/icons/modrinth.png"
+                hoverSrc="/images/icons/modrinth-hover.png"
+                alt="modrinth"
+                href="https://modrinth.com/organization/brassworks"
+            />
+            <HoverImage
+                src="/images/icons/github.png"
+                hoverSrc="/images/icons/github-hover.png"
+                alt="github"
+                href="https://github.com/Brassworks-smp"
+            />
           </div>
         </div>
       </header>
-    </>
   );
 }
-
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className
-          )}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  );
-});
-ListItem.displayName = "ListItem";

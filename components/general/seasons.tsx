@@ -73,7 +73,7 @@ export function SeasonsSection() {
                                     src={season.imageUrl}
                                     alt={season.title}
                                     fill
-                                    className="object-contain rounded-t-xl"
+                                    className="object-contain rounded-t-xl pixelated"
                                 />
                             </div>
 
