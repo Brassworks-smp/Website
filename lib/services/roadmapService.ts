@@ -1,31 +1,21 @@
-// ----------------------------------------
-// 🔹 Types
-// ----------------------------------------
-
 export interface ApiTask {
   id: string;
   name: string;
   type: "additions" | "fixes" | "removals";
-  status: "unconfirmed" | "in_progress" | "done";
+  status: "unconfirmed" | "in_progress" | "in_testing" | "under_review" | "done" | "released";
   version: string;
   description?: string;
   assignee_id?: number | null;
   assignee_name?: string | null;
+  subcategory?: string | null;
+  image_url?: string | null;
 }
 
 export interface ApiVersion {
   current_version: string;
 }
 
-// ----------------------------------------
-// 🔹 API base URL
-// ----------------------------------------
-
 const API_BASE = "https://api.opnsoc.org/roadmap";
-
-// ----------------------------------------
-// 🔹 Fetch: All tasks (no caching)
-// ----------------------------------------
 
 export async function fetchTasks(): Promise<ApiTask[]> {
   const res = await fetch(`${API_BASE}/tasks`, {
@@ -36,10 +26,6 @@ export async function fetchTasks(): Promise<ApiTask[]> {
 
   return res.json();
 }
-
-// ----------------------------------------
-// 🔹 Fetch: Current version (no caching)
-// ----------------------------------------
 
 export async function fetchCurrentVersion(): Promise<string> {
   const res = await fetch(`${API_BASE}/version`, {
