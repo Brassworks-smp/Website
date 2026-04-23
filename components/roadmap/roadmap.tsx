@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { fetchTasks, fetchCurrentVersion, ApiTask } from "../../lib/services/roadmapService";
 
 type TaskStatus = "Unconfirmed" | "In Progress" | "In Testing" | "Under Review" | "Done" | "Released";
@@ -80,9 +80,12 @@ const STATUS_COLOR: Record<
 };
 
 const TYPE_COLOR: Record<string, string> = {
-  Addition: "bg-emerald-500 border-emerald-500 ring-emerald-400 shadow-[0_3px_0_theme(colors.emerald.700)]",
-  Fix: "bg-amber-500 border-amber-500 ring-amber-400 shadow-[0_3px_0_theme(colors.amber.700)]",
-  Removal : "bg-rose-500 border-rose-500 ring-rose-400 shadow-[0_3px_0_theme(colors.rose.700)]",
+  Addition:
+      "bg-emerald-500 border-emerald-500 ring-emerald-400 shadow-[0_3px_0_theme(colors.emerald.700)]",
+  Fix:
+      "bg-amber-500 border-amber-500 ring-amber-400 shadow-[0_3px_0_theme(colors.amber.700)]",
+  Removal:
+      "bg-rose-500 border-rose-500 ring-rose-400 shadow-[0_3px_0_theme(colors.rose.700)]",
 };
 
 function parseVersion(version: string) {
@@ -109,6 +112,19 @@ export default function Roadmap() {
   const [collapsedGroups, setCollapsedGroups] = useState<Record<string, boolean>>({});
   const [currentVersion, setCurrentVersion] = useState<string>("...");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const [hovered, setHovered] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+
+    if (hovered) {
+      videoRef.current.play();
+    } else {
+      videoRef.current.pause();
+    }
+  }, [hovered]);
 
   useEffect(() => {
     async function load() {
@@ -183,136 +199,173 @@ export default function Roadmap() {
 
   return (
       <>
-        <section className="bg-cover backdrop-blur-l bg-[url(/images/background.png)]">
-          <div className="h-[calc(100vh-2.5rem)] sm:px-20 mx-auto py-8 sm:py-12">
-            <div className="mx-auto text-center mb-10">
-              <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Modpack Roadmap</p>
-              <h2 className="text-3xl md:text-4xl font-bold font-minecraft">Version {currentVersion}</h2>
-            </div>
+        <section className="bg-background">
+          <div className="h-[calc(100vh-2.5rem)] mx-auto">
+            {/* Banner oben */}
+            <section
+                className="relative h-40 w-full overflow-hidden flex items-center justify-center border-b-2 border-b-gray-200/10"
+                onMouseEnter={() => setHovered(true)}
+                onMouseLeave={() => setHovered(false)}
+            >
+              <video
+                  ref={videoRef}
+                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
+                      hovered ? "blur-sm scale-105" : "blur-md scale-110"
+                  }`}
+                  muted
+                  loop
+                  playsInline
+              >
+                <source src="/videos/background.mp4" type="video/mp4" />
+              </video>
 
-            <div className="mx-auto">
-              <div className="flex gap-4 overflow-x-auto pb-4">
-                {versionGroups.map((group) => {
-                  const subcategories = Array.from(
-                      new Set(group.tasks.map((t) => t.subcategory ?? "General"))
-                  );
+              <div className="absolute inset-0 bg-black/50 transition-opacity duration-700" />
 
-                  return (
-                      <div
-                          key={group.version}
-                          className="w-[420px] flex-shrink-0 rounded-md flex flex-col"
-                      >
-                        <div className="flex items-center justify-between px-3 py-2 border-b-2 rounded-t-md border-stone-800 bg-stone-900/70">
-                          <div className="flex items-center gap-2">
-                            <h3 className="text-sm text-stone-100 font-bold font-minecraft">
-                              {group.version}
-                            </h3>
-                            {group.version === currentVersion && (
-                                <span className="inline-flex items-center justify-center text-[10px] px-2 h-[20px] rounded-full bg-emerald-700 text-emerald-100 border border-emerald-500">
-                            Current
+              <div
+                  className={`relative z-10 text-center transition-all duration-500 ${
+                      hovered ? "scale-105 opacity-100" : "scale-95 opacity-90"
+                  }`}
+              >
+                <p className="text-xs uppercase tracking-[0.2em] text-stone-300">
+                  Modpack Roadmap
+                </p>
+                <h2 className="text-3xl md:text-4xl font-bold font-minecraft text-white">
+                  Version {currentVersion}
+                </h2>
+              </div>
+            </section>
+
+            <div className="sm:px-20 py-8 sm:py-12">
+              <div className="mx-auto">
+                <div className="flex gap-4 overflow-x-auto pb-4">
+                  {versionGroups.map((group) => {
+                    const subcategories = Array.from(
+                        new Set(group.tasks.map((t) => t.subcategory ?? "General"))
+                    );
+
+                    return (
+                        <div
+                            key={group.version}
+                            className="w-[420px] flex-shrink-0 rounded-md flex flex-col"
+                        >
+                          <div className="flex items-center justify-between px-3 py-2 border-b-2 rounded-t-md border-stone-800 bg-stone-900/70">
+                            <div className="flex items-center gap-2">
+                              <h3 className="text-sm text-stone-100 font-bold font-minecraft">
+                                {group.version}
+                              </h3>
+                              {group.version === currentVersion && (
+                                  <span className="inline-flex items-center justify-center text-[10px] px-2 h-[20px] rounded-full bg-emerald-700 text-emerald-100 border border-emerald-500">
+                              Current
+                            </span>
+                              )}
+                              <span className="inline-flex items-center justify-center text-[11px] min-w-[22px] h-[20px] rounded-full bg-stone-800 text-stone-200">
+                            {group.tasks.length}
                           </span>
-                            )}
-                            <span className="inline-flex items-center justify-center text-[11px] min-w-[22px] h-[20px] rounded-full bg-stone-800 text-stone-200">
-                          {group.tasks.length}
-                        </span>
+                            </div>
+                          </div>
+
+                          <div
+                              className="flex flex-col gap-3 px-3 py-3 lg:max-h-[60vh] bg-card rounded-b-md overflow-y-auto"
+                              style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}
+                          >
+                            {subcategories.map((subcat) => {
+                              const tasksBySubcategory = group.tasks.filter(
+                                  (t) => (t.subcategory ?? "General") === subcat
+                              );
+                              const key = `${group.version}-${subcat}`;
+                              const isCollapsed = collapsedGroups[key];
+
+                              return (
+                                  <div
+                                      key={subcat}
+                                      className="rounded-lg bg-stone-950/70 border-stone-600/20 border-2"
+                                  >
+                                    <button
+                                        type="button"
+                                        onClick={() => toggleGroup(group.version, subcat)}
+                                        className="w-full flex items-center justify-between px-2.5 py-1.5 text-xs text-stone-200 bg-stone-900/70 rounded-t-md"
+                                    >
+                                      <div className="flex items-center gap-2">
+                                        <span className="text-[11px] font-semibold">{subcat}</span>
+                                        <span className="inline-flex items-center justify-center text-[10px] min-w-[20px] h-[18px] rounded-full bg-stone-800 text-stone-200">
+                                    {tasksBySubcategory.length}
+                                  </span>
+                                      </div>
+                                      <span className="text-[11px]">{isCollapsed ? "▶" : "▼"}</span>
+                                    </button>
+
+                                    {!isCollapsed && (
+                                        <div className="flex flex-col gap-2 px-2.5 py-2">
+                                          {tasksBySubcategory.map((task, index) => (
+                                              <div
+                                                  key={`${group.version}-${subcat}-${task.id ?? index}`}
+                                                  className="relative flex flex-col gap-2 p-3 rounded-md border border-stone-800 bg-card hover:border-stone-600 hover:bg-stone-900/70 transition-all duration-200"
+                                              >
+                                                {task.imageUrl && (
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setSelectedImage(task.imageUrl || null)}
+                                                        className="w-full overflow-hidden rounded-md border border-stone-800 bg-stone-900/60"
+                                                    >
+                                                      <img
+                                                          src={task.imageUrl}
+                                                          alt={task.title}
+                                                          className="w-full h-36 object-cover hover:scale-[1.02] transition-transform duration-200"
+                                                      />
+                                                    </button>
+                                                )}
+
+                                                <div className="text-sm text-white break-words">
+                                                  {task.title} <br />
+                                                  <small className="text-stone-500">#{task.id}</small>
+                                                </div>
+
+                                                {task.description && (
+                                                    <div className="text-xs mb-1.5 text-stone-300 break-words">
+                                                      {task.description}
+                                                    </div>
+                                                )}
+
+                                                <div className="flex items-center justify-between gap-2 flex-wrap">
+                                                  <div className="flex items-center gap-2 flex-wrap">
+                                                    {task.owner && (
+                                                        <div
+                                                            className="font-minecraft inline-flex items-center px-2.5 py-1 h-7 text-[11px] text-white bg-amber-500 border border-amber-600 ring-2 ring-inset ring-amber-400 shadow-[0_3px_theme(colors.amber.700)] rounded-md"
+                                                            title={task.owner}
+                                                        >
+                                                          {task.owner}
+                                                        </div>
+                                                    )}
+
+                                                    {task.category && (
+                                                        <div
+                                                            className={`font-minecraft inline-flex items-center px-2.5 py-1 h-7 text-[11px] text-white border ring-2 ring-inset rounded-md ${TYPE_COLOR[task.category]}`}
+                                                            title={task.category}
+                                                        >
+                                                          {task.category}
+                                                        </div>
+                                                    )}
+                                                  </div>
+
+                                                  <div
+                                                      className={`font-minecraft inline-flex items-center px-2.5 py-1 h-7 text-[11px] text-white border ring-2 ring-inset rounded-md ${STATUS_COLOR[task.status].bg} ${STATUS_COLOR[task.status].border} ${STATUS_COLOR[task.status].ring} ${STATUS_COLOR[task.status].shadow}`}
+                                                      title={task.status}
+                                                  >
+                                                    {task.status}
+                                                  </div>
+                                                </div>
+                                              </div>
+                                          ))}
+                                        </div>
+                                    )}
+                                  </div>
+                              );
+                            })}
                           </div>
                         </div>
-
-                        <div
-                            className="flex flex-col gap-3 px-3 py-3 lg:max-h-[60vh] bg-card rounded-b-md overflow-y-auto"
-                            style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}
-                        >
-                          {subcategories.map((subcat) => {
-                            const tasksBySubcategory = group.tasks.filter((t) => (t.subcategory ?? "General") === subcat);
-                            const key = `${group.version}-${subcat}`;
-                            const isCollapsed = collapsedGroups[key];
-
-                            return (
-                                <div key={subcat} className="rounded-lg bg-stone-950/70 border-stone-600/20 border-2">
-                                  <button
-                                      type="button"
-                                      onClick={() => toggleGroup(group.version, subcat)}
-                                      className="w-full flex items-center justify-between px-2.5 py-1.5 text-xs text-stone-200 bg-stone-900/70 rounded-t-md"
-                                  >
-                                    <div className="flex items-center gap-2">
-                                      <span className="text-[11px] font-semibold">{subcat}</span>
-                                      <span className="inline-flex items-center justify-center text-[10px] min-w-[20px] h-[18px] rounded-full bg-stone-800 text-stone-200">
-                                  {tasksBySubcategory.length}
-                                </span>
-                                    </div>
-                                    <span className="text-[11px]">{isCollapsed ? "▶" : "▼"}</span>
-                                  </button>
-
-                                  {!isCollapsed && (
-                                      <div className="flex flex-col gap-2 px-2.5 py-2">
-                                        {tasksBySubcategory.map((task, index) => (
-                                            <div
-                                                key={`${group.version}-${subcat}-${task.id ?? index}`}
-                                                className="relative flex flex-col gap-2 p-3 rounded-md border border-stone-800 bg-card hover:border-stone-600 hover:bg-stone-900/70 transition-all duration-200"
-                                            >
-                                              {task.imageUrl && (
-                                                  <button
-                                                      type="button"
-                                                      onClick={() => setSelectedImage(task.imageUrl || null)}
-                                                      className="w-full overflow-hidden rounded-md border border-stone-800 bg-stone-900/60"
-                                                  >
-                                                    <img
-                                                        src={task.imageUrl}
-                                                        alt={task.title}
-                                                        className="w-full h-36 object-cover hover:scale-[1.02] transition-transform duration-200"
-                                                    />
-                                                  </button>
-                                              )}
-
-                                              <div className="text-sm text-white break-words">
-                                                {task.title} <br/><small className="text-stone-500">#{task.id}</small>
-                                              </div>
-
-                                              {task.description && (
-                                                  <div className="text-xs mb-1.5 text-stone-300 break-words">
-                                                    {task.description}
-                                                  </div>
-                                              )}
-
-                                              <div className="flex items-center justify-between gap-2 flex-wrap">
-                                                <div className="flex items-center gap-2 flex-wrap">
-                                                  {task.owner && (
-                                                      <div
-                                                          className="font-minecraft inline-flex items-center px-2.5 py-1 h-7 text-[11px] text-white bg-amber-500 border border-amber-600 ring-2 ring-inset ring-amber-400 shadow-[0_3px_theme(colors.amber.700)] rounded-md"
-                                                          title={task.owner}
-                                                      >
-                                                        {task.owner}
-                                                      </div>
-                                                  )}
-
-                                                  {task.category && (
-                                                      <div
-                                                          className={`font-minecraft inline-flex items-center px-2.5 py-1 h-7 text-[11px] text-white border ring-2 ring-inset rounded-md ${TYPE_COLOR[task.category]}`}
-                                                          title={task.category}
-                                                      >
-                                                        {task.category}
-                                                      </div>
-                                                  )}
-                                                </div>
-
-                                                <div
-                                                    className={`font-minecraft inline-flex items-center px-2.5 py-1 h-7 text-[11px] text-white border ring-2 ring-inset rounded-md ${STATUS_COLOR[task.status].bg} ${STATUS_COLOR[task.status].border} ${STATUS_COLOR[task.status].ring} ${STATUS_COLOR[task.status].shadow}`}
-                                                    title={task.status}
-                                                >
-                                                  {task.status}
-                                                </div>
-                                              </div>
-                                            </div>
-                                        ))}
-                                      </div>
-                                  )}
-                                </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
