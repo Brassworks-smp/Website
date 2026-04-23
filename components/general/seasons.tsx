@@ -66,7 +66,7 @@ export function SeasonsSection() {
                     {seasons.map((season, index) => (
                         <div
                             key={index}
-                            className="bg-white dark:bg-zinc-900 rounded-xl shadow-lg overflow-hidden flex flex-col"
+                            className="bg-zinc-900 rounded-xl shadow-lg overflow-hidden flex flex-col"
                         >
                             <div className="relative mx-10 h-60 ">
                                 <Image

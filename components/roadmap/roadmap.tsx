@@ -254,11 +254,11 @@ export default function Roadmap() {
                                 {group.version}
                               </h3>
                               {group.version === currentVersion && (
-                                  <span className="inline-flex items-center justify-center text-[10px] px-2 h-[20px] rounded-full bg-emerald-700 text-emerald-100 border border-emerald-500">
+                                  <span className="inline-flex items-center justify-center text-[9px] px-1.5 h-[17px] rounded-md bg-emerald-500 text-emerald-100">
                               Current
                             </span>
                               )}
-                              <span className="inline-flex items-center justify-center text-[11px] min-w-[22px] h-[20px] rounded-full bg-stone-800 text-stone-200">
+                              <span className="inline-flex items-center justify-center text-[11px] min-w-[22px] h-[20px] rounded-sm bg-stone-800 text-stone-200">
                             {group.tasks.length}
                           </span>
                             </div>

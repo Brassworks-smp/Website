@@ -13,8 +13,8 @@ export const metadata = {
 
 export default function Map() {
   return (
-    <section className="relative mt-16 justify-center overflow-hidden">
-        <iframe src="https://brassmap.opnsoc.org/" width="100%" className="min-h-[93vh] h-screen">
+    <section className="relative justify-center overflow-hidden">
+        <iframe src="https://brassmap.opnsoc.org/" width="100%" className="h-[calc(100vh-2.5rem)]">
         </iframe>
     </section>
   );
