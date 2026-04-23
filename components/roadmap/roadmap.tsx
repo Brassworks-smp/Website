@@ -184,7 +184,7 @@ export default function Roadmap() {
   return (
       <>
         <section className="bg-cover backdrop-blur-l bg-[url(/images/background.png)]">
-          <div className="h-[calc(100vh-2.5rem)] px-20 mx-auto py-8 sm:py-12">
+          <div className="h-[calc(100vh-2.5rem)] sm:px-20 mx-auto py-8 sm:py-12">
             <div className="mx-auto text-center mb-10">
               <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Modpack Roadmap</p>
               <h2 className="text-3xl md:text-4xl font-bold font-minecraft">Version {currentVersion}</h2>
