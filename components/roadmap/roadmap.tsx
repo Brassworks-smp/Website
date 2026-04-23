@@ -200,7 +200,7 @@ export default function Roadmap() {
                   return (
                       <div
                           key={group.version}
-                          className="min-w-[320px] sm:min-w-[360px] md:min-w-[420px] max-w-[480px] flex-shrink-0 rounded-md flex flex-col"
+                          className="w-[420px] flex-shrink-0 rounded-md flex flex-col"
                       >
                         <div className="flex items-center justify-between px-3 py-2 border-b-2 rounded-t-md border-stone-800 bg-stone-900/70">
                           <div className="flex items-center gap-2">
@@ -265,7 +265,7 @@ export default function Roadmap() {
                                               )}
 
                                               <div className="text-sm text-white break-words">
-                                                {task.title} <small className="text-stone-500">#{task.id}</small>
+                                                {task.title} <br/><small className="text-stone-500">#{task.id}</small>
                                               </div>
 
                                               {task.description && (
