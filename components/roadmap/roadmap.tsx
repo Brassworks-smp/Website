@@ -1,9 +1,22 @@
+// Roadmap.tsx
+
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { fetchTasks, fetchCurrentVersion, ApiTask } from "../../lib/services/roadmapService";
+import {
+  fetchTasks,
+  fetchCurrentVersion,
+  ApiTask,
+} from "../../lib/services/roadmapService";
+import { ROADMAP_CONTENT } from "@/lib/config";
 
-type TaskStatus = "Unconfirmed" | "In Progress" | "In Testing" | "Under Review" | "Done" | "Released";
+type TaskStatus =
+    | "Unconfirmed"
+    | "In Progress"
+    | "In Testing"
+    | "Under Review"
+    | "Done"
+    | "Released";
 
 interface Task {
   id: string;
@@ -104,13 +117,20 @@ function compareVersions(a: string, b: string) {
     if (av !== bv) return av - bv;
   }
 
-  return a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" });
+  return a.localeCompare(b, undefined, {
+    numeric: true,
+    sensitivity: "base",
+  });
 }
 
 export default function Roadmap() {
   const [versionGroups, setVersionGroups] = useState<VersionGroup[]>([]);
-  const [collapsedGroups, setCollapsedGroups] = useState<Record<string, boolean>>({});
-  const [currentVersion, setCurrentVersion] = useState<string>("...");
+  const [collapsedGroups, setCollapsedGroups] = useState<
+      Record<string, boolean>
+  >({});
+  const [currentVersion, setCurrentVersion] = useState<string>(
+      ROADMAP_CONTENT.fallback.currentVersion
+  );
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const [hovered, setHovered] = useState(false);
@@ -129,7 +149,11 @@ export default function Roadmap() {
   useEffect(() => {
     async function load() {
       try {
-        const [tasks, version] = await Promise.all([fetchTasks(), fetchCurrentVersion()]);
+        const [tasks, version] = await Promise.all([
+          fetchTasks(),
+          fetchCurrentVersion(),
+        ]);
+
         setCurrentVersion(version);
 
         const mappedTasks: Task[] = tasks
@@ -137,14 +161,27 @@ export default function Roadmap() {
               const status = API_STATUS_MAP[t.status];
               if (!status) return null;
 
-              const owner = t.assignee_name && t.assignee_name !== "Unassigned" ? t.assignee_name : undefined;
-              const description = t.description && t.description !== "No description provided." ? t.description : undefined;
+              const owner =
+                  t.assignee_name &&
+                  t.assignee_name !== ROADMAP_CONTENT.fallback.assignee
+                      ? t.assignee_name
+                      : undefined;
+
+              const description =
+                  t.description &&
+                  t.description !== ROADMAP_CONTENT.fallback.description
+                      ? t.description
+                      : undefined;
+
               const subcategory =
-                  typeof t.subcategory === "string" && t.subcategory.trim().length > 0
+                  typeof t.subcategory === "string" &&
+                  t.subcategory.trim().length > 0
                       ? t.subcategory.trim()
-                      : "General";
+                      : ROADMAP_CONTENT.fallback.subcategory;
+
               const imageUrl =
-                  typeof t.image_url === "string" && t.image_url.trim().length > 0
+                  typeof t.image_url === "string" &&
+                  t.image_url.trim().length > 0
                       ? t.image_url.trim()
                       : undefined;
 
@@ -162,20 +199,38 @@ export default function Roadmap() {
             })
             .filter(Boolean) as Task[];
 
-        const uniqueVersions = Array.from(new Set(mappedTasks.map((t) => t.version))).sort(compareVersions);
+        const uniqueVersions = Array.from(
+            new Set(mappedTasks.map((t) => t.version))
+        ).sort(compareVersions);
+
         const currentIndex = uniqueVersions.indexOf(version);
+
         const visibleVersions =
-            currentIndex >= 0 ? uniqueVersions.slice(currentIndex, currentIndex + 4) : uniqueVersions.slice(0, 4);
+            currentIndex >= 0
+                ? uniqueVersions.slice(
+                    currentIndex,
+                    currentIndex + ROADMAP_CONTENT.layout.visibleVersions
+                )
+                : uniqueVersions.slice(
+                    0,
+                    ROADMAP_CONTENT.layout.visibleVersions
+                );
 
         const groups: VersionGroup[] = visibleVersions.map((v) => ({
           version: v,
           tasks: mappedTasks
               .filter((t) => t.version === v)
               .sort((a, b) => {
-                const sub = (a.subcategory || "").localeCompare(b.subcategory || "");
+                const sub = (a.subcategory || "").localeCompare(
+                    b.subcategory || ""
+                );
                 if (sub !== 0) return sub;
-                const cat = (a.category || "").localeCompare(b.category || "");
+
+                const cat = (a.category || "").localeCompare(
+                    b.category || ""
+                );
                 if (cat !== 0) return cat;
+
                 return a.title.localeCompare(b.title);
               }),
         }));
@@ -191,6 +246,7 @@ export default function Roadmap() {
 
   const toggleGroup = (version: string, subcategory?: string) => {
     const key = subcategory ? `${version}-${subcategory}` : version;
+
     setCollapsedGroups((prev) => ({
       ...prev,
       [key]: !prev[key],
@@ -201,7 +257,6 @@ export default function Roadmap() {
       <>
         <section className="bg-background">
           <div className="h-[calc(100vh-2.5rem)] mx-auto">
-            {/* Banner oben */}
             <section
                 className="relative h-40 w-full overflow-hidden flex items-center justify-center border-b-2 border-b-gray-200/10"
                 onMouseEnter={() => setHovered(true)}
@@ -216,21 +271,27 @@ export default function Roadmap() {
                   loop
                   playsInline
               >
-                <source src="/videos/background.mp4" type="video/mp4" />
+                <source
+                    src={ROADMAP_CONTENT.background.video}
+                    type="video/mp4"
+                />
               </video>
 
               <div className="absolute inset-0 bg-black/50 transition-opacity duration-700" />
 
               <div
                   className={`relative z-10 text-center transition-all duration-500 ${
-                      hovered ? "scale-105 opacity-100" : "scale-95 opacity-90"
+                      hovered
+                          ? "scale-105 opacity-100"
+                          : "scale-95 opacity-90"
                   }`}
               >
                 <p className="text-xs uppercase tracking-[0.2em] text-stone-300">
-                  Modpack Roadmap
+                  {ROADMAP_CONTENT.title}
                 </p>
+
                 <h2 className="text-3xl md:text-4xl font-bold font-minecraft text-white">
-                  Version {currentVersion}
+                  {ROADMAP_CONTENT.versionLabel} {currentVersion}
                 </h2>
               </div>
             </section>
@@ -240,7 +301,14 @@ export default function Roadmap() {
                 <div className="flex gap-4 overflow-x-auto pb-4">
                   {versionGroups.map((group) => {
                     const subcategories = Array.from(
-                        new Set(group.tasks.map((t) => t.subcategory ?? "General"))
+                        new Set(
+                            group.tasks.map(
+                                (t) =>
+                                    t.subcategory ??
+                                    ROADMAP_CONTENT.fallback
+                                        .subcategory
+                            )
+                        )
                     );
 
                     return (
@@ -253,27 +321,43 @@ export default function Roadmap() {
                               <h3 className="text-sm text-stone-100 font-bold font-minecraft">
                                 {group.version}
                               </h3>
-                              {group.version === currentVersion && (
-                                  <span className="inline-flex items-center justify-center text-[10px] px-2 h-[20px] rounded-full bg-emerald-700 text-emerald-100 border border-emerald-500">
-                              Current
-                            </span>
-                              )}
+
+                              {group.version ===
+                                  currentVersion && (
+                                      <span className="inline-flex items-center justify-center text-[10px] px-2 h-[20px] rounded-full bg-emerald-700 text-emerald-100 border border-emerald-500">
+                                                            {
+                                                              ROADMAP_CONTENT.currentLabel
+                                                            }
+                                                        </span>
+                                  )}
+
                               <span className="inline-flex items-center justify-center text-[11px] min-w-[22px] h-[20px] rounded-full bg-stone-800 text-stone-200">
-                            {group.tasks.length}
-                          </span>
+                                                        {group.tasks.length}
+                                                    </span>
                             </div>
                           </div>
 
                           <div
                               className="flex flex-col gap-3 px-3 py-3 lg:max-h-[60vh] bg-card rounded-b-md overflow-y-auto"
-                              style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}
+                              style={{
+                                msOverflowStyle: "none",
+                                scrollbarWidth: "none",
+                              }}
                           >
                             {subcategories.map((subcat) => {
-                              const tasksBySubcategory = group.tasks.filter(
-                                  (t) => (t.subcategory ?? "General") === subcat
-                              );
+                              const tasksBySubcategory =
+                                  group.tasks.filter(
+                                      (t) =>
+                                          (t.subcategory ??
+                                              ROADMAP_CONTENT
+                                                  .fallback
+                                                  .subcategory) ===
+                                          subcat
+                                  );
+
                               const key = `${group.version}-${subcat}`;
-                              const isCollapsed = collapsedGroups[key];
+                              const isCollapsed =
+                                  collapsedGroups[key];
 
                               return (
                                   <div
@@ -282,80 +366,131 @@ export default function Roadmap() {
                                   >
                                     <button
                                         type="button"
-                                        onClick={() => toggleGroup(group.version, subcat)}
+                                        onClick={() =>
+                                            toggleGroup(
+                                                group.version,
+                                                subcat
+                                            )
+                                        }
                                         className="w-full flex items-center justify-between px-2.5 py-1.5 text-xs text-stone-200 bg-stone-900/70 rounded-t-md"
                                     >
                                       <div className="flex items-center gap-2">
-                                        <span className="text-[11px] font-semibold">{subcat}</span>
+                                                                    <span className="text-[11px] font-semibold">
+                                                                        {subcat}
+                                                                    </span>
+
                                         <span className="inline-flex items-center justify-center text-[10px] min-w-[20px] h-[18px] rounded-full bg-stone-800 text-stone-200">
-                                    {tasksBySubcategory.length}
-                                  </span>
+                                                                        {
+                                                                          tasksBySubcategory.length
+                                                                        }
+                                                                    </span>
                                       </div>
-                                      <span className="text-[11px]">{isCollapsed ? "▶" : "▼"}</span>
+
+                                      <span className="text-[11px]">
+                                                                    {isCollapsed
+                                                                        ? "▶"
+                                                                        : "▼"}
+                                                                </span>
                                     </button>
 
                                     {!isCollapsed && (
                                         <div className="flex flex-col gap-2 px-2.5 py-2">
-                                          {tasksBySubcategory.map((task, index) => (
-                                              <div
-                                                  key={`${group.version}-${subcat}-${task.id ?? index}`}
-                                                  className="relative flex flex-col gap-2 p-3 rounded-md border border-stone-800 bg-card hover:border-stone-600 hover:bg-stone-900/70 transition-all duration-200"
-                                              >
-                                                {task.imageUrl && (
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => setSelectedImage(task.imageUrl || null)}
-                                                        className="w-full overflow-hidden rounded-md border border-stone-800 bg-stone-900/60"
-                                                    >
-                                                      <img
-                                                          src={task.imageUrl}
-                                                          alt={task.title}
-                                                          className="w-full h-36 object-cover hover:scale-[1.02] transition-transform duration-200"
-                                                      />
-                                                    </button>
-                                                )}
-
-                                                <div className="text-sm text-white break-words">
-                                                  {task.title} <br />
-                                                  <small className="text-stone-500">#{task.id}</small>
-                                                </div>
-
-                                                {task.description && (
-                                                    <div className="text-xs mb-1.5 text-stone-300 break-words">
-                                                      {task.description}
-                                                    </div>
-                                                )}
-
-                                                <div className="flex items-center justify-between gap-2 flex-wrap">
-                                                  <div className="flex items-center gap-2 flex-wrap">
-                                                    {task.owner && (
-                                                        <div
-                                                            className="font-minecraft inline-flex items-center px-2.5 py-1 h-7 text-[11px] text-white bg-amber-500 border border-amber-600 ring-2 ring-inset ring-amber-400 shadow-[0_3px_theme(colors.amber.700)] rounded-md"
-                                                            title={task.owner}
-                                                        >
-                                                          {task.owner}
-                                                        </div>
-                                                    )}
-
-                                                    {task.category && (
-                                                        <div
-                                                            className={`font-minecraft inline-flex items-center px-2.5 py-1 h-7 text-[11px] text-white border ring-2 ring-inset rounded-md ${TYPE_COLOR[task.category]}`}
-                                                            title={task.category}
-                                                        >
-                                                          {task.category}
-                                                        </div>
-                                                    )}
-                                                  </div>
-
+                                          {tasksBySubcategory.map(
+                                              (
+                                                  task,
+                                                  index
+                                              ) => (
                                                   <div
-                                                      className={`font-minecraft inline-flex items-center px-2.5 py-1 h-7 text-[11px] text-white border ring-2 ring-inset rounded-md ${STATUS_COLOR[task.status].bg} ${STATUS_COLOR[task.status].border} ${STATUS_COLOR[task.status].ring} ${STATUS_COLOR[task.status].shadow}`}
-                                                      title={task.status}
+                                                      key={`${group.version}-${subcat}-${task.id ?? index}`}
+                                                      className="relative flex flex-col gap-2 p-3 rounded-md border border-stone-800 bg-card hover:border-stone-600 hover:bg-stone-900/70 transition-all duration-200"
                                                   >
-                                                    {task.status}
+                                                    {task.imageUrl && (
+                                                        <button
+                                                            type="button"
+                                                            onClick={() =>
+                                                                setSelectedImage(
+                                                                    task.imageUrl ||
+                                                                    null
+                                                                )
+                                                            }
+                                                            className="w-full overflow-hidden rounded-md border border-stone-800 bg-stone-900/60"
+                                                        >
+                                                          <img
+                                                              src={
+                                                                task.imageUrl
+                                                              }
+                                                              alt={
+                                                                task.title
+                                                              }
+                                                              className="w-full h-36 object-cover hover:scale-[1.02] transition-transform duration-200"
+                                                          />
+                                                        </button>
+                                                    )}
+
+                                                    <div className="text-sm text-white break-words">
+                                                      {
+                                                        task.title
+                                                      }{" "}
+                                                      <br />
+                                                      <small className="text-stone-500">
+                                                        #
+                                                        {
+                                                          task.id
+                                                        }
+                                                      </small>
+                                                    </div>
+
+                                                    {task.description && (
+                                                        <div className="text-xs mb-1.5 text-stone-300 break-words">
+                                                          {
+                                                            task.description
+                                                          }
+                                                        </div>
+                                                    )}
+
+                                                    <div className="flex items-center justify-between gap-2 flex-wrap">
+                                                      <div className="flex items-center gap-2 flex-wrap">
+                                                        {task.owner && (
+                                                            <div
+                                                                className="font-minecraft inline-flex items-center px-2.5 py-1 h-7 text-[11px] text-white bg-amber-500 border border-amber-600 ring-2 ring-inset ring-amber-400 shadow-[0_3px_theme(colors.amber.700)] rounded-md"
+                                                                title={
+                                                                  task.owner
+                                                                }
+                                                            >
+                                                              {
+                                                                task.owner
+                                                              }
+                                                            </div>
+                                                        )}
+
+                                                        {task.category && (
+                                                            <div
+                                                                className={`font-minecraft inline-flex items-center px-2.5 py-1 h-7 text-[11px] text-white border ring-2 ring-inset rounded-md ${TYPE_COLOR[task.category]}`}
+                                                                title={
+                                                                  task.category
+                                                                }
+                                                            >
+                                                              {
+                                                                task.category
+                                                              }
+                                                            </div>
+                                                        )}
+                                                      </div>
+
+                                                      <div
+                                                          className={`font-minecraft inline-flex items-center px-2.5 py-1 h-7 text-[11px] text-white border ring-2 ring-inset rounded-md ${STATUS_COLOR[task.status].bg} ${STATUS_COLOR[task.status].border} ${STATUS_COLOR[task.status].ring} ${STATUS_COLOR[task.status].shadow}`}
+                                                          title={
+                                                            task.status
+                                                          }
+                                                      >
+                                                        {
+                                                          task.status
+                                                        }
+                                                      </div>
+                                                    </div>
                                                   </div>
-                                                </div>
-                                              </div>
-                                          ))}
+                                              )
+                                          )}
                                         </div>
                                     )}
                                   </div>
@@ -383,13 +518,15 @@ export default function Roadmap() {
                 <button
                     type="button"
                     onClick={() => setSelectedImage(null)}
+                    aria-label={ROADMAP_CONTENT.imagePreview.closeLabel}
                     className="absolute right-3 top-3 z-10 inline-flex items-center justify-center w-8 h-8 rounded-md bg-stone-900/90 border border-stone-700 text-white"
                 >
                   ✕
                 </button>
+
                 <img
                     src={selectedImage}
-                    alt="Preview"
+                    alt={ROADMAP_CONTENT.imagePreview.alt}
                     className="w-full max-h-[85vh] object-contain rounded-md"
                 />
               </div>
