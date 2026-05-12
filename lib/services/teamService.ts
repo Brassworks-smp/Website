@@ -1,4 +1,4 @@
-// services/teamService.ts
+// lib/services/teamService.ts
 
 import { Scale, Crown, Sparkle, LucideIcon } from "lucide-react";
 
@@ -16,7 +16,7 @@ export interface TeamMember {
 }
 
 // ----------------------------------------
-// 🔹 Icon mapping for roles
+// 🔹Icon mapping for roles
 // ----------------------------------------
 
 export const roleIcons: Record<Role, LucideIcon> = {
