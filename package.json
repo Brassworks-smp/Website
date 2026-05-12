@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "concurrently \\\"next start\\\" \\\"tsx lib/services/metricsService.ts\\\"",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
