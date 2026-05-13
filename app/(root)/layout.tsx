@@ -30,7 +30,6 @@ export default function RootLayout({
           </div>
           <Toaster />
         </ThemeProvider>
-        <script defer src="https://cloud.umami.is/script.js" data-website-id="52b00db8-05b2-416a-9590-6cd49b67f24c"></script>
       </body>
     </html>
   );
