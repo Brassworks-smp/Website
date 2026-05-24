@@ -16,7 +16,7 @@ function HoverImage({ src, hoverSrc, alt, href }) {
           height={24}
           className="pixelated transition-all duration-250 ease-out"
           style={{
-            transform: isHovered ? "scale(0.91)" : "scale(1)",
+            transform: isHovered ? "scale(0.98)" : "scale(1)",
             cursor: "pointer",
           }}
           onMouseEnter={() => setIsHovered(true)}
@@ -47,25 +47,25 @@ export function Header() {
           <div className="py-1 flex items-center gap-3">
             <HoverImage
                 src="/images/icons/kofi.png"
-                hoverSrc="/images/icons/kofi-hover.png"
+                hoverSrc="/images/icons/kofi_hover.png"
                 alt="kofi"
                 href="https://ko-fi.com/brassworks"
             />
             <HoverImage
                 src="/images/icons/discord.png"
-                hoverSrc="/images/icons/discord-hover.png"
+                hoverSrc="/images/icons/discord_hover.png"
                 alt="discord"
                 href="https://brassworks.opnsoc.org/discord"
             />
             <HoverImage
                 src="/images/icons/modrinth.png"
-                hoverSrc="/images/icons/modrinth-hover.png"
+                hoverSrc="/images/icons/modrinth_hover.png"
                 alt="modrinth"
                 href="https://modrinth.com/organization/brassworks"
             />
             <HoverImage
                 src="/images/icons/github.png"
-                hoverSrc="/images/icons/github-hover.png"
+                hoverSrc="/images/icons/github_hover.png"
                 alt="github"
                 href="https://github.com/Brassworks-smp"
             />

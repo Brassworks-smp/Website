@@ -69,7 +69,7 @@ export function HeroSection() {
             <div className="absolute flex justify-center items-center bottom-0 left-0 w-full h-40 bg-gradient-to-t from-background via-background/70 to-transparent z-[1]">
                 <Link
                     target="_blank"
-                    href={HERO_CONTENT.discordUrl}
+                    href={HERO_CONTENT.url}
                 >
                     <div
                         className={`relative inline-block cursor-pointer transition-all duration-1000 ${

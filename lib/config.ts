@@ -1,6 +1,6 @@
 // components/general/hero-section.tsx
 export const HERO_CONTENT = {
-    discordUrl: "https://brassworks.opnsoc.org/discord",
+    url: "https://modrinth.com/server/brassworks-smp-official-server",
 
     button: {
         width: 230,
