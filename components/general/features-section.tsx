@@ -60,7 +60,7 @@ export function FeaturesSection() {
             A cooperative Minecraft experience
           </h2>
           <p className="text-muted-foreground text-lg max-w-4xl">
-            Build, trade and create together in a fully customized world with quests, economy, and reliability at it's core.
+            Build, trade and create together in a fully customized world with missions, economy, and reliability at it's core.
           </p>
         </div>
 
