@@ -53,12 +53,6 @@ let teamMembers: TeamMember[] = [
         role: "administrator",
         tag: "@float420",
         avatarUrl: "/images/avatars/float420.png?v=3",
-    },
-    {
-        name: "Extremely_Moist",
-        role: "moderator",
-        tag: "@hex_beans",
-        avatarUrl: "/images/avatars/extremely_moist.png?v=3",
     }
 ];
 

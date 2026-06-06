@@ -28,7 +28,7 @@ export function Footer() {
                     <Github className="h-5 w-5" />
                     <span className="sr-only">GitHub</span>
                 </Link>
-              <Link href="https://brassworks.opnsoc.org/map" className="text-muted-foreground hover:text-foreground transition">
+              <Link href="https://brassworks.opn-soc.org/map" className="text-muted-foreground hover:text-foreground transition">
                 <Map className="h-5 w-5" />
                 <span className="sr-only">Live Map</span>
               </Link>

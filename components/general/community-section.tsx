@@ -49,7 +49,7 @@ export function CommunitySection() {
                     <div className="flex flex-col gap-6 w-full h-[500px]">
                         {[
                             {
-                                href: "https://brassworks.opnsoc.org/map",
+                                href: "https://brassworks.opn-soc.org/map",
                                 icon: <Map className="h-5 w-5" />,
                                 iconBg:
                                     "bg-green-500/20 text-green-600 dark:bg-green-400/20 dark:text-green-300",

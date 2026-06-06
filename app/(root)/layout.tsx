@@ -9,28 +9,55 @@ import { Toaster } from '@/components/ui/toaster';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Brassworks - Error',
+  metadataBase: new URL('https://brassworks.opn-soc.org'),
+  title: {
+    default: 'Create: Brassworks - SMP',
+    template: '%s | Brassworks',
+  },
   description:
-    'Our public server thrives on cooperation between players - express your creativity freely, with each other.',
+      'Our public server thrives on cooperation between players - express your creativity freely, with each other.',
+  openGraph: {
+    title: 'Create: Brassworks - SMP',
+    description:
+        'Our public server thrives on cooperation between players - express your creativity freely, with each other.',
+    url: 'https://brassworks.opn-soc.org/',
+    siteName: 'Brassworks',
+    images: [
+      {
+        url: '/images/icon.png',
+        width: 512,
+        height: 512,
+        alt: 'Brassworks Logo',
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Create: Brassworks - SMP',
+    description:
+        'Our public server thrives on cooperation between players - express your creativity freely, with each other.',
+    images: ['/images/icon.png'],
+  },
 };
 
 export default function RootLayout({
-  children,
-}: {
+                                     children,
+                                   }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+      <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1 overflow-hidden">{children}</main>
-            <Footer />
-          </div>
-          <Toaster />
-        </ThemeProvider>
+      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <div className="flex min-h-screen flex-col">
+          <Header />
+          <main className="flex-1 overflow-hidden">{children}</main>
+          <Footer />
+        </div>
+        <Toaster />
+      </ThemeProvider>
       </body>
-    </html>
+      </html>
   );
 }
