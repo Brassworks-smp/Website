@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Brassworks - Roadmap",
         description: "A quick overview of upcoming features, planned updates, and ongoing improvements shaping the future of our SMP experience.",
-        url: "https://brassworks.opn-soc.org/roadmap",
+        url: "https://brassworks.opnsoc.org/roadmap",
         type: "website",
         images: ["/images/icon.png"],
     },

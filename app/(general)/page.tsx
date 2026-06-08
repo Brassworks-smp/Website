@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Brassworks - Create SMP",
         description: "Our public server thrives on cooperation between players - express your creativity freely, with each other.",
-        url: "https://brassworks.opn-soc.org/",
+        url: "https://brassworks.opnsoc.org/",
         type: "website",
         images: ["/images/icon.png"],
     },

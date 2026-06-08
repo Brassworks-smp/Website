@@ -40,7 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
     const iconUrl =
         invite.guild?.id && invite.guild.icon
             ? `https://cdn.discordapp.com/icons/${invite.guild.id}/${invite.guild.icon}.png?size=512`
-            : "https://brassworks.opn-soc.org/images/icon.png";
+            : "https://brassworks.opnsoc.org/images/icon.png";
 
     return {
       title: `${guildName} - Discord`,
@@ -48,7 +48,7 @@ export async function generateMetadata(): Promise<Metadata> {
       openGraph: {
         title: `${guildName} - Discord`,
         description,
-        url: "https://brassworks.opn-soc.org/discord",
+        url: "https://brassworks.opnsoc.org/discord",
         siteName: "Brassworks",
         type: "website",
         images: [
@@ -77,7 +77,7 @@ export async function generateMetadata(): Promise<Metadata> {
       openGraph: {
         title: "Brassworks - Discord",
         description: "Join the Brassworks Discord community.",
-        url: "https://brassworks.opn-soc.org/discord",
+        url: "https://brassworks.opnsoc.org/discord",
         type: "website",
         images: ["/images/icon.png"],
       },

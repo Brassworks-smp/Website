@@ -55,7 +55,7 @@ export function Header() {
                 src="/images/icons/discord.png"
                 hoverSrc="/images/icons/discord_hover.png"
                 alt="discord"
-                href="https://brassworks.opn-soc.org/discord"
+                href="https://brassworks.opnsoc.org/discord"
             />
             <HoverImage
                 src="/images/icons/modrinth.png"

@@ -9,7 +9,7 @@ import { Toaster } from '@/components/ui/toaster';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://brassworks.opn-soc.org'),
+  metadataBase: new URL('https://brassworks.opnsoc.org'),
   title: {
     default: 'Create: Brassworks - SMP',
     template: '%s | Brassworks',
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: 'Create: Brassworks - SMP',
     description:
         'Our public server thrives on cooperation between players - express your creativity freely, with each other.',
-    url: 'https://brassworks.opn-soc.org/',
+    url: 'https://brassworks.opnsoc.org/',
     siteName: 'Brassworks',
     images: [
       {
