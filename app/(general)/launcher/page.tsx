@@ -24,14 +24,13 @@ export const metadata: Metadata = {
     },
 };
 
-const README_RAW = "https://raw.githubusercontent.com/Brassworks-smp/BrassworksLauncher/main";
 const SCREENSHOTS = [
-    { src: `${README_RAW}/assets/img_3.png`, alt: "Play menu" },
-    { src: `${README_RAW}/assets/img_4.png`, alt: "Instances" },
-    { src: `${README_RAW}/assets/img_5.png`, alt: "Content" },
-    { src: `${README_RAW}/assets/img_6.png`, alt: "Skins" },
-    { src: `${README_RAW}/assets/img_7.png`, alt: "CurseForge modpacks" },
-    { src: `${README_RAW}/assets/img_8.png`, alt: "Light mode" },
+    { src: "/images/launcher/img_3.png", alt: "Play menu" },
+    { src: "/images/launcher/img_4.png", alt: "Instances" },
+    { src: "/images/launcher/img_5.png", alt: "Content" },
+    { src: "/images/launcher/img_6.png", alt: "Skins" },
+    { src: "/images/launcher/img_7.png", alt: "CurseForge modpacks" },
+    { src: "/images/launcher/img_8.png", alt: "Light mode" },
 ];
 
 export default async function LauncherPage() {
