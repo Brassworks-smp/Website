@@ -39,10 +39,27 @@ export function Header() {
   return (
       <header className="top-0 z-50 w-full transition-colors duration-300 bg-card border-b-2 border-b-gray-200/10">
         <div className="container2 flex h-10 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Image src="/images/icon.png" alt="icon" width={28} height={28} />
-            <p className="text-sm  text-gray-300 font-minecraft tracking-widest">BRASSWORKS</p>
-          </Link>
+          <div className="flex items-center gap-6">
+            <Link href="/" className="flex items-center gap-2">
+              <Image src="/images/icon.png" alt="icon" width={28} height={28} />
+              <p className="text-sm  text-gray-300 font-minecraft tracking-widest">BRASSWORKS</p>
+            </Link>
+
+            <nav className="hidden sm:flex items-center gap-5">
+              <Link
+                  href="/launcher"
+                  className="text-xs text-gray-400 hover:text-amber-400 font-minecraft tracking-widest transition-colors"
+              >
+                LAUNCHER
+              </Link>
+              <Link
+                  href="/roadmap"
+                  className="text-xs text-gray-400 hover:text-amber-400 font-minecraft tracking-widest transition-colors"
+              >
+                ROADMAP
+              </Link>
+            </nav>
+          </div>
 
           <div className="py-1 flex items-center gap-3">
             <HoverImage
