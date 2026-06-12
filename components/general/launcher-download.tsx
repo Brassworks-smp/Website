@@ -128,19 +128,38 @@ export function LauncherDownload({ release }: { release: LauncherRelease | null 
         );
     }
 
+    const osMeta = OS_TABS.find((t) => t.id === os);
+
     return (
         <div className="space-y-8">
             {recommended && (
-                <div className="rounded-xl border border-amber-500/30 bg-gradient-to-b from-amber-500/10 to-transparent p-5 text-center">
-                    <p className="mb-1 text-xs uppercase tracking-widest text-amber-400/80">
-                        {detected ? "Detected for your system" : "Recommended"}
-                    </p>
-                    <div className="mt-3 flex justify-center">
-                        <DownloadButton link={recommended} primary />
+                <div className="relative overflow-hidden rounded-2xl border border-amber-500/30 bg-gradient-to-b from-amber-500/10 via-amber-500/5 to-transparent p-7 text-center">
+                    <div className="pointer-events-none absolute inset-x-0 -top-24 mx-auto h-48 w-48 rounded-full bg-amber-500/20 blur-3xl" />
+                    <div className="relative">
+                        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-amber-500/30 bg-amber-500/10 text-amber-300">
+                            {osMeta?.icon}
+                        </div>
+                        <p className="text-xs uppercase tracking-widest text-amber-400/80">
+                            {detected ? "Detected for your system" : "Recommended"}
+                        </p>
+                        <h2 className="font-minecraft mt-1 text-xl font-bold text-zinc-100">
+                            {osMeta?.label}
+                            {arch !== "unknown" && (
+                                <span className="ml-2 align-middle text-xs uppercase tracking-wide text-zinc-500">
+                                    {arch === "arm64" ? "ARM64" : "64-bit"}
+                                </span>
+                            )}
+                        </h2>
+                        <div className="mt-5 flex justify-center">
+                            <DownloadButton link={recommended} primary />
+                        </div>
+                        <p className="mt-4 text-xs text-zinc-500">
+                            <span className="rounded-full border border-zinc-700 bg-zinc-900/60 px-2 py-0.5 text-zinc-400">
+                                v{release.version}
+                            </span>
+                            <span className="ml-2">Not your platform? Pick another below.</span>
+                        </p>
                     </div>
-                    <p className="mt-3 text-xs text-zinc-500">
-                        Version {release.version} · not your platform? Pick below.
-                    </p>
                 </div>
             )}
 
@@ -291,6 +310,18 @@ export function LauncherDownload({ release }: { release: LauncherRelease | null 
                         )}
                     </div>
                 </div>
+
+                <p className="mt-6 text-center text-sm text-zinc-500">
+                    Looking for older builds or checksums?{" "}
+                    <Link
+                        href={release.htmlUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-amber-400 underline hover:text-amber-300"
+                    >
+                        Browse all releases on GitHub →
+                    </Link>
+                </p>
             </div>
         </div>
     );

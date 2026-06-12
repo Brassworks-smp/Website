@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { LauncherDownload } from "@/components/general/launcher-download";
-import { LauncherGallery } from "@/components/general/launcher-gallery";
+import {
+    LauncherArchitecture,
+    LauncherFeatures,
+    LauncherThemes,
+} from "@/components/general/launcher-sections";
 import { getLatestLauncherRelease } from "@/lib/services/launcherService";
 
 export const metadata: Metadata = {
@@ -24,29 +28,25 @@ export const metadata: Metadata = {
     },
 };
 
-const SCREENSHOTS = [
-    { src: "/images/launcher/img_3.png", alt: "Play menu" },
-    { src: "/images/launcher/img_4.png", alt: "Instances" },
-    { src: "/images/launcher/img_5.png", alt: "Content" },
-    { src: "/images/launcher/img_6.png", alt: "Skins" },
-    { src: "/images/launcher/img_7.png", alt: "CurseForge modpacks" },
-    { src: "/images/launcher/img_8.png", alt: "Light mode" },
-];
-
 export default async function LauncherPage() {
     const release = await getLatestLauncherRelease();
 
     return (
         <div className="relative mx-auto">
-            <section className="px-6 pb-16 pt-28 text-zinc-100">
+            <section className="px-6 pb-24 pt-28 text-zinc-100">
                 <div className="container max-w-5xl mx-auto">
                     <div className="mb-12 text-center">
-                        <h1 className="font-minecraft uppercase text-3xl md:text-5xl font-bold mb-4">
-                            Brassworks Launcher
-                        </h1>
+                        <img
+                            src="/images/BrassworksLogo.png"
+                            alt="Brassworks Launcher"
+                            className="mx-auto mb-6 w-full max-w-md"
+                            draggable={false}
+                        />
                         <p className="mx-auto max-w-2xl text-zinc-400">
                             The fastest way onto the Brassworks Create SMP — instance
                             management, modpack updates, skins and more, in one native app.
+                            Built with Rust and Tauri for installing, managing, and launching
+                            our custom modpack as simply as possible.
                         </p>
                         {release && (
                             <p className="mt-4 text-xs uppercase tracking-widest text-amber-400/80">
@@ -56,14 +56,30 @@ export default async function LauncherPage() {
                     </div>
 
                     <LauncherDownload release={release} />
-                    <div className="mt-20">
-                        <h2 className="font-minecraft uppercase text-2xl md:text-3xl font-bold mb-2 text-center">
-                            Screenshots
+
+                    <LauncherFeatures />
+                    <LauncherThemes />
+                    <LauncherArchitecture />
+
+                    <div className="mt-20 rounded-xl border border-zinc-800 bg-zinc-900/40 p-6 text-center">
+                        <h2 className="font-minecraft text-sm uppercase tracking-widest text-amber-400">
+                            Open source
                         </h2>
-                        <p className="mb-8 text-center text-zinc-400">
-                            A look inside the launcher.
+                        <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400">
+                            Brassworks Launcher is free and open source, licensed under the{" "}
+                            <strong className="text-zinc-200">
+                                GNU Lesser General Public License v3.0 or later
+                            </strong>{" "}
+                            (LGPL-3.0-or-later).
                         </p>
-                        <LauncherGallery shots={SCREENSHOTS} />
+                        <a
+                            href="https://github.com/Brassworks-smp/BrassworksLauncher"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="mt-4 inline-block text-sm text-amber-400 underline hover:text-amber-300"
+                        >
+                            View the source on GitHub →
+                        </a>
                     </div>
                 </div>
             </section>
