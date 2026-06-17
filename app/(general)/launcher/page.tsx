@@ -68,9 +68,9 @@ export default async function LauncherPage() {
                         <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400">
                             Brassworks Launcher is free and open source, licensed under the{" "}
                             <strong className="text-zinc-200">
-                                GNU Lesser General Public License v3.0 or later
+                                GNU General Public License v3.0 or later
                             </strong>{" "}
-                            (LGPL-3.0-or-later).
+                            (GPL-3.0-or-later).
                         </p>
                         <a
                             href="https://github.com/Brassworks-smp/BrassworksLauncher"
