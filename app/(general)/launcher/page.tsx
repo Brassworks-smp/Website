@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { LauncherDownload } from "@/components/general/launcher-download";
 import {
     LauncherArchitecture,
+    LauncherCommandPalette,
     LauncherFeatures,
     LauncherThemes,
+    LauncherTranslations,
 } from "@/components/general/launcher-sections";
 import { getLatestLauncherRelease } from "@/lib/services/launcherService";
 
@@ -43,7 +45,7 @@ export default async function LauncherPage() {
                             draggable={false}
                         />
                         <p className="mx-auto max-w-2xl text-zinc-400">
-                            The fastest way onto the Brassworks Create SMP — instance
+                            The fastest way onto the Brassworks Create SMP: instance
                             management, modpack updates, skins and more, in one native app.
                             Built with Rust and Tauri for installing, managing, and launching
                             our custom modpack as simply as possible.
@@ -58,8 +60,10 @@ export default async function LauncherPage() {
                     <LauncherDownload release={release} />
 
                     <LauncherFeatures />
+                    <LauncherCommandPalette />
                     <LauncherThemes />
                     <LauncherArchitecture />
+                    <LauncherTranslations />
 
                     <div className="mt-20 rounded-xl border border-zinc-800 bg-zinc-900/40 p-6 text-center">
                         <h2 className="font-minecraft text-sm uppercase tracking-widest text-amber-400">

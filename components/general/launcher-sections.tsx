@@ -1,5 +1,15 @@
 import React from "react";
-import { Boxes, Layers, Coffee, Package, Palette, Settings2, DownloadCloud } from "lucide-react";
+import {
+    Boxes,
+    Layers,
+    Coffee,
+    Package,
+    Palette,
+    Settings2,
+    DownloadCloud,
+    Terminal,
+    Languages,
+} from "lucide-react";
 
 const ARCHITECTURE: { icon: React.ReactNode; title: string; body: React.ReactNode }[] = [
     {
@@ -110,7 +120,7 @@ const FEATURES: { src: string; alt: string; title: string; body: string }[] = [
         src: "/images/launcher/PlayScreen.png",
         alt: "Play screen",
         title: "One click to play",
-        body: "The Play screen pulls together everything for the active instance — launch state, playtime, pack version, and the latest news from the server — so you are one button away from jumping in.",
+        body: "The Play screen pulls together everything for the active instance, including launch state, playtime, pack version, and the latest news from the server, so you are one button away from jumping in.",
     },
     {
         src: "/images/launcher/Instances.png",
@@ -128,7 +138,7 @@ const FEATURES: { src: string; alt: string; title: string; body: string }[] = [
         src: "/images/launcher/SkinSelector.png",
         alt: "Skin selector",
         title: "Skins and capes",
-        body: "Build skin presets as full loadouts — each with its own cape — then preview them on a live 3D model and apply with a single click.",
+        body: "Build skin presets as full loadouts, each with its own cape, then preview them on a live 3D model and apply with a single click.",
     },
     {
         src: "/images/launcher/Worlds.png",
@@ -195,11 +205,16 @@ const THEMES = [
     { src: "/images/launcher/OledTheme.png", label: "OLED" },
     { src: "/images/launcher/MochaTheme.png", label: "Mocha" },
     { src: "/images/launcher/OceanTheme.png", label: "Ocean" },
+    { src: "/images/launcher/NordTheme.png", label: "Nord" },
+    { src: "/images/launcher/AmethystTheme.png", label: "Amethyst" },
+    { src: "/images/launcher/CrimsonTheme.png", label: "Crimson" },
+    { src: "/images/launcher/ForestTheme.png", label: "Forest" },
+    { src: "/images/launcher/RoseTheme.png", label: "Rose" },
 ];
 
 const EXTRAS = [
     {
-        src: "/images/launcher/SettingsCustomizable.png",
+        src: "/images/launcher/SettingsCustomization.png",
         icon: <Settings2 className="h-4 w-4" />,
         label: "Customisable settings and accent colours",
     },
@@ -226,7 +241,7 @@ export function LauncherThemes() {
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
                 {THEMES.map((t) => (
                     <figure
                         key={t.label}
@@ -268,6 +283,115 @@ export function LauncherThemes() {
                     </figure>
                 ))}
             </div>
+        </div>
+    );
+}
+
+const PALETTE_COMMANDS = [
+    "/instance launch survival --world \"My Base\"",
+    "/content install sodium --source modrinth",
+    "/modpack sync",
+    "/world backup survival",
+    "/skin apply knight",
+    "/settings set max-memory 8192",
+    "/theme brass-ocean",
+];
+
+const CLI_COMMANDS = [
+    "brassworks help",
+    "brassworks instance launch survival",
+    "brassworks go settings",
+    "brassworks \"content install sodium\"",
+];
+
+export function LauncherCommandPalette() {
+    return (
+        <div className="mt-24">
+            <div className="mb-10 text-center">
+                <h2 className="font-minecraft uppercase text-2xl md:text-3xl font-bold">
+                    <span className="inline-flex items-center gap-2">
+                        <Terminal className="h-6 w-6 text-amber-400" />
+                        Command palette &amp; CLI
+                    </span>
+                </h2>
+                <p className="mx-auto mt-2 max-w-2xl text-zinc-400">
+                    Press{" "}
+                    <kbd className="rounded border border-zinc-700 bg-zinc-800 px-1.5 py-0.5 text-xs text-zinc-200">
+                        ⌘K
+                    </kbd>{" "}
+                    /{" "}
+                    <kbd className="rounded border border-zinc-700 bg-zinc-800 px-1.5 py-0.5 text-xs text-zinc-200">
+                        Ctrl K
+                    </kbd>{" "}
+                    to fuzzy-find any action, or type{" "}
+                    <kbd className="rounded border border-zinc-700 bg-zinc-800 px-1.5 py-0.5 text-xs text-zinc-200">
+                        /
+                    </kbd>{" "}
+                    for Discord-style slash commands with per-argument autocomplete for
+                    everything the UI can do.
+                </p>
+            </div>
+
+            <div className="overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 shadow-lg">
+                <img
+                    src="/images/launcher/CommandPallete.png"
+                    alt="Command palette"
+                    loading="lazy"
+                    draggable={false}
+                    className="w-full"
+                />
+            </div>
+
+            <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
+                <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-5">
+                    <h3 className="font-minecraft text-sm uppercase tracking-wide text-zinc-100">
+                        In-app slash commands
+                    </h3>
+                    <pre className="mt-3 overflow-x-auto text-sm leading-relaxed text-zinc-300">
+                        <code>{PALETTE_COMMANDS.join("\n")}</code>
+                    </pre>
+                </div>
+                <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-5">
+                    <h3 className="font-minecraft text-sm uppercase tracking-wide text-zinc-100">
+                        From your terminal
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+                        Install the{" "}
+                        <code className="rounded bg-zinc-800 px-1 text-zinc-200">brassworks</code>{" "}
+                        command once from Settings → Launcher, then run the same actions from
+                        your shell.
+                    </p>
+                    <pre className="mt-3 overflow-x-auto text-sm leading-relaxed text-zinc-300">
+                        <code>{CLI_COMMANDS.join("\n")}</code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export function LauncherTranslations() {
+    return (
+        <div className="mt-24 rounded-xl border border-zinc-800 bg-zinc-900/40 p-6 text-center">
+            <h2 className="font-minecraft text-sm uppercase tracking-widest text-amber-400">
+                <span className="inline-flex items-center gap-2">
+                    <Languages className="h-4 w-4" />
+                    Translations
+                </span>
+            </h2>
+            <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400">
+                Brassworks Launcher is translated on Crowdin. Want the launcher in your
+                language, or spotted some wording that&apos;s off? Pick a language, or
+                request a new one, and start translating. No coding required.
+            </p>
+            <a
+                href="https://crowdin.com/project/brassworks-launcher"
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 inline-block text-sm text-amber-400 underline hover:text-amber-300"
+            >
+                Help translate on Crowdin →
+            </a>
         </div>
     );
 }
