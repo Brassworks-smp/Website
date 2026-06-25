@@ -40,8 +40,17 @@ function DetailRow({
     );
 }
 
+function resolveIconSrc(icon: string): string {
+    if (icon.startsWith("data:") || icon.startsWith("/")) return icon;
+    if (/^https?:\/\//i.test(icon)) {
+        return `/api/icon?url=${encodeURIComponent(icon)}`;
+    }
+    return icon;
+}
+
 export function InstallLanding(info: InstallInfo) {
     const [launched, setLaunched] = useState(false);
+    const [iconFailed, setIconFailed] = useState(false);
     useEffect(() => {
         const t = setTimeout(() => {
             window.location.href = info.deepLink;
@@ -63,11 +72,12 @@ export function InstallLanding(info: InstallInfo) {
             <div className="relative overflow-hidden rounded-2xl border border-amber-500/30 bg-gradient-to-b from-amber-500/10 via-amber-500/5 to-transparent p-7">
                 <div className="pointer-events-none absolute inset-x-0 -top-24 mx-auto h-48 w-48 rounded-full bg-amber-500/20 blur-3xl" />
                 <div className="relative flex flex-col items-center text-center sm:flex-row sm:items-center sm:gap-6 sm:text-left">
-                    {info.icon ? (
+                    {info.icon && !iconFailed ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
-                            src={info.icon}
+                            src={resolveIconSrc(info.icon)}
                             alt={info.name}
+                            onError={() => setIconFailed(true)}
                             className="pixelated mb-4 h-24 w-24 shrink-0 rounded-2xl border border-zinc-700 bg-zinc-900 object-cover sm:mb-0"
                             draggable={false}
                         />
