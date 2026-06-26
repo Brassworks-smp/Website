@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Rocket, Download, Package, MemoryStick, Cpu, ShieldCheck, ExternalLink } from "lucide-react";
+import { Rocket, Download, Package, MemoryStick, Cpu, ShieldCheck, ExternalLink, User } from "lucide-react";
 
 export interface InstallInfo {
     deepLink: string;
@@ -14,6 +14,7 @@ export interface InstallInfo {
     maxMemoryMb?: string;
     jvmArgs?: string;
     unsup?: boolean;
+    sharedBy?: string;
 }
 
 function DetailRow({
@@ -96,6 +97,15 @@ export function InstallLanding(info: InstallInfo) {
                         {info.description && (
                             <p className="mt-2 max-w-xl text-sm text-zinc-400">
                                 {info.description}
+                            </p>
+                        )}
+                        {info.sharedBy && (
+                            <p className="mt-2 inline-flex items-center gap-1.5 text-xs text-zinc-400">
+                                <User className="h-3.5 w-3.5 text-amber-400/80" />
+                                Shared by{" "}
+                                <span className="font-medium text-zinc-200">
+                                    {info.sharedBy}
+                                </span>
                             </p>
                         )}
                     </div>

@@ -93,6 +93,7 @@ export default async function InstallPage({
                             maxMemoryMb={firstValue(params.max_memory_mb)}
                             jvmArgs={firstValue(params.jvm_args)}
                             unsup={unsupRaw === "true" || unsupRaw === "1"}
+                            sharedBy={firstValue(params.shared_by)}
                         />
                     ) : (
                         <InstallGenerator />

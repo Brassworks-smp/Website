@@ -8,7 +8,7 @@ const SCHEME = "brassworks://install";
 const INSTALL_PATH = "/install";
 
 type Parsed =
-    | { ok: true; query: string; name: string }
+    | { ok: true; query: string; name: string; sharedBy?: string }
     | { ok: false; error: string }
     | { ok: null };
 
@@ -50,6 +50,7 @@ function parseInput(raw: string): Parsed {
         ok: true,
         query: query.toString(),
         name: query.get("name") || "Untitled modpack",
+        sharedBy: query.get("shared_by") || undefined,
     };
 }
 
@@ -121,6 +122,7 @@ export function InstallGenerator() {
                     <div className="mt-5 space-y-3">
                         <p className="font-minecraft text-xs uppercase tracking-widest text-zinc-500">
                             Shareable link · {parsed.name}
+                            {parsed.sharedBy ? ` · shared by ${parsed.sharedBy}` : ""}
                         </p>
                         <div className="flex flex-col gap-2 sm:flex-row">
                             <input
