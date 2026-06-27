@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import {
     Boxes,
     Layers,
@@ -9,6 +10,10 @@ import {
     DownloadCloud,
     Terminal,
     Languages,
+    PackageCheck,
+    Share2,
+    Link2,
+    ArrowRight,
 } from "lucide-react";
 
 const ARCHITECTURE: { icon: React.ReactNode; title: string; body: React.ReactNode }[] = [
@@ -366,6 +371,184 @@ export function LauncherCommandPalette() {
                     </pre>
                 </div>
             </div>
+        </div>
+    );
+}
+
+function MediaRow({
+    src,
+    alt,
+    imageLeft = true,
+    children,
+}: {
+    src: string;
+    alt: string;
+    imageLeft?: boolean;
+    children: React.ReactNode;
+}) {
+    return (
+        <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-2 lg:gap-12">
+            <div
+                className={`overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 shadow-lg ${
+                    imageLeft ? "lg:order-1" : "lg:order-2"
+                }`}
+            >
+                <img
+                    src={src}
+                    alt={alt}
+                    loading="lazy"
+                    draggable={false}
+                    className="w-full"
+                />
+            </div>
+            <div className={imageLeft ? "lg:order-2" : "lg:order-1"}>{children}</div>
+        </div>
+    );
+}
+
+export function LauncherExport() {
+    return (
+        <div className="mt-24">
+            <div className="mb-10 text-center">
+                <h2 className="font-minecraft uppercase text-2xl md:text-3xl font-bold">
+                    <span className="inline-flex items-center gap-2">
+                        <PackageCheck className="h-6 w-6 text-amber-400" />
+                        Export to any launcher
+                    </span>
+                </h2>
+                <p className="mx-auto mt-2 max-w-2xl text-zinc-400">
+                    Turn any instance into a shareable pack, in the format your players
+                    already use.
+                </p>
+            </div>
+
+            <MediaRow src="/images/launcher/ExportMenu.png" alt="Export modpack window">
+                <p className="leading-relaxed text-zinc-400">
+                    Export any instance in{" "}
+                    <strong className="text-zinc-200">three formats</strong> &mdash; packwiz,
+                    Modrinth <code className="rounded bg-zinc-800 px-1 text-zinc-200">.mrpack</code>
+                    , or CurseForge <code className="rounded bg-zinc-800 px-1 text-zinc-200">.zip</code>{" "}
+                    &mdash; straight from the launcher. A guided window lets you choose a format,
+                    pick exactly which mods, configs, and files to include, and name the pack with
+                    its author and version, then writes the finished pack to your Downloads folder.
+                </p>
+                <p className="mt-4 leading-relaxed text-zinc-400">
+                    Flip on <strong className="text-zinc-200">unsup flavors</strong> to add flavor
+                    groups so players can choose variants when they install, optionally{" "}
+                    <strong className="text-zinc-200">sign</strong> the pack so installers can verify
+                    it&apos;s genuine, and save any setup as a reusable{" "}
+                    <strong className="text-zinc-200">export config</strong>. Blocked CurseForge mods
+                    are bundled in automatically, so packs verify cleanly everywhere.
+                </p>
+            </MediaRow>
+        </div>
+    );
+}
+
+export function LauncherSharing() {
+    return (
+        <div className="mt-24">
+            <div className="mb-10 text-center">
+                <h2 className="font-minecraft uppercase text-2xl md:text-3xl font-bold">
+                    <span className="inline-flex items-center gap-2">
+                        <Share2 className="h-6 w-6 text-amber-400" />
+                        Publish &amp; share your pack
+                    </span>
+                </h2>
+                <p className="mx-auto mt-2 max-w-2xl text-zinc-400">
+                    Hand friends a link, and keep their copy in sync every time you publish.
+                </p>
+            </div>
+
+            <MediaRow
+                src="/images/launcher/SharingMenu.png"
+                alt="Share modpack window"
+                imageLeft={false}
+            >
+                <p className="leading-relaxed text-zinc-400">
+                    Connect a <strong className="text-zinc-200">GitHub or GitLab</strong> account
+                    once with an access token (stored only on your computer), and Brassworks
+                    publishes the pack to a repo for you and hands back a share link. When a friend
+                    opens it, the launcher installs an{" "}
+                    <strong className="text-zinc-200">auto-updating</strong> copy that re-syncs every
+                    time you publish a change &mdash; or save the pack as a{" "}
+                    <code className="rounded bg-zinc-800 px-1 text-zinc-200">.packwiz</code> file to
+                    share by hand.
+                </p>
+                <p className="mt-4 leading-relaxed text-zinc-400">
+                    A built-in content editor lets you pick exactly which mods, configs, and files
+                    go in, author <strong className="text-zinc-200">flavor groups</strong> so players
+                    choose variants at install time, and mark mods as{" "}
+                    <strong className="text-zinc-200">optional</strong>. Publish update pushes your
+                    edits, Sync from shared pulls the live pack back into your copy, and Disconnect
+                    unlinks at any time.
+                </p>
+            </MediaRow>
+        </div>
+    );
+}
+
+export function LauncherShareFormat() {
+    return (
+        <div className="mt-24">
+            <div className="mb-10 text-center">
+                <h2 className="font-minecraft uppercase text-2xl md:text-3xl font-bold">
+                    <span className="inline-flex items-center gap-2">
+                        <Link2 className="h-6 w-6 text-amber-400" />
+                        One-click install links
+                    </span>
+                </h2>
+                <p className="mx-auto mt-2 max-w-2xl text-zinc-400">
+                    Share a single file &mdash; or link &mdash; that opens the launcher straight to
+                    an install.
+                </p>
+            </div>
+
+            <MediaRow
+                src="/images/launcher/PackwizUrlImport.png"
+                alt="Packwiz pack install screen"
+            >
+                <p className="leading-relaxed text-zinc-400">
+                    A <code className="rounded bg-zinc-800 px-1 text-zinc-200">.packwiz</code> file is
+                    a small JSON pointer to your{" "}
+                    <a
+                        href="https://packwiz.infra.link/"
+                        className="text-amber-400 hover:text-amber-300"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        packwiz
+                    </a>{" "}
+                    pack. Opening it brings up a confirmation screen with the pack&apos;s name, icon,
+                    description, and settings, then walks through the normal flavour and
+                    optional-content steps. The launcher registers as the handler for{" "}
+                    <code className="rounded bg-zinc-800 px-1 text-zinc-200">.packwiz</code> files on
+                    macOS, Windows, and Linux.
+                </p>
+                <p className="mt-4 leading-relaxed text-zinc-400">
+                    A website can trigger the exact same install with a{" "}
+                    <code className="rounded bg-zinc-800 px-1 text-zinc-200">brassworks://install</code>{" "}
+                    URL &mdash; no download needed.
+                </p>
+
+                <div className="mt-6 rounded-xl border border-amber-500/30 bg-amber-500/5 p-5">
+                    <h3 className="font-minecraft text-sm uppercase tracking-wide text-amber-400">
+                        Sharing on Discord?
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+                        <code className="rounded bg-zinc-800 px-1 text-zinc-200">brassworks://</code>{" "}
+                        links aren&apos;t clickable in most chat apps. Turn one into a clean,
+                        clickable page that forwards straight into the launcher.
+                    </p>
+                    <Link
+                        href="/install"
+                        className="font-minecraft mt-4 inline-flex items-center gap-2 rounded-md border border-amber-600 bg-amber-500/90 px-4 py-2 text-sm text-white transition hover:bg-amber-400"
+                    >
+                        Open the link generator
+                        <ArrowRight className="h-4 w-4" />
+                    </Link>
+                </div>
+            </MediaRow>
         </div>
     );
 }

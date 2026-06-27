@@ -3,7 +3,10 @@ import { LauncherDownload } from "@/components/general/launcher-download";
 import {
     LauncherArchitecture,
     LauncherCommandPalette,
+    LauncherExport,
     LauncherFeatures,
+    LauncherSharing,
+    LauncherShareFormat,
     LauncherThemes,
     LauncherTranslations,
 } from "@/components/general/launcher-sections";
@@ -61,6 +64,9 @@ export default async function LauncherPage() {
 
                     <LauncherFeatures />
                     <LauncherCommandPalette />
+                    <LauncherExport />
+                    <LauncherSharing />
+                    <LauncherShareFormat />
                     <LauncherThemes />
                     <LauncherArchitecture />
                     <LauncherTranslations />
