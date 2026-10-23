@@ -656,7 +656,7 @@ function DesktopHeroSection() {
                                                     <img
                                                         src={slide.thumbnail}
                                                         alt={`${slide.title} preview`}
-                                                        className="h-full w-full object-cover"
+                                                        className="h-full w-full object-contain"
                                                         draggable="false"
                                                         decoding="async"
                                                     />
