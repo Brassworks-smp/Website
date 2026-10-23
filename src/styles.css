@@ -75,7 +75,7 @@ html[data-site-theme="ocean"] {
 
 html[data-site-theme],
 html[data-site-theme] body {
-    background-color: var(--site-deep);
+    background-color: var(--site-bg);
     transition: background-color 700ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -360,7 +360,7 @@ html[data-site-theme] body {
     html {
         scroll-behavior: smooth;
         scroll-padding-top: 84px;
-        background: #0d0c0b;
+        background: #171614;
     }
 
     section[id] {
@@ -370,7 +370,7 @@ html[data-site-theme] body {
     body {
         margin: 0;
         overflow-x: hidden;
-        background: #0d0c0b;
+        background: #171614;
         color: white;
     }
 
