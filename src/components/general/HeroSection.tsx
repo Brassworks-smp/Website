@@ -186,7 +186,7 @@ function MobileHeroSection() {
                             key={slide.id}
                             src={slide.thumbnail}
                             alt=""
-                            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1800ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                            className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-[1800ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                                 index === activeIndex
                                     ? "opacity-100"
                                     : "opacity-0"
