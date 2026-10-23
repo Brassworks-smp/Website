@@ -11,29 +11,30 @@ import { Footer } from "../components/general/Footer.tsx";
 import { createPageMetadata } from "../lib/seo.ts";
 
 export const Route = createFileRoute("/")({
-    head: () => createPageMetadata({
-        title: "Brassworks | Made to Create",
-        description:
-            "Discover Brassworks mods, modpacks, community projects, news, media, and the Brassworks Launcher.",
-        path: "/",
-    }),
+    head: () =>
+        createPageMetadata({
+            title: "Brassworks | Made to Create",
+            description:
+                "Discover Brassworks mods, modpacks, community projects, news, media, and the Brassworks Launcher.",
+            path: "/",
+        }),
     component: IndexRoute,
 });
 
 function IndexRoute() {
     return (
         <>
-            <Header/>
-            <main>
-                <HeroSection/>
-                <CreationsSection/>
-                <ModsSection/>
-                <TeamSection/>
-                <NewsSection/>
-                <MediaSection/>
-                <ClosingSection/>
+            <Header />
+            <main className="min-h-screen">
+                <HeroSection />
+                <CreationsSection />
+                <ModsSection />
+                <TeamSection />
+                <NewsSection />
+                <MediaSection />
+                <ClosingSection />
             </main>
-            <Footer/>
+            <Footer />
         </>
     );
 }

@@ -8,191 +8,274 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as FinancesRouteImport } from './routes/finances'
-import { Route as LauncherRouteImport } from './routes/launcher'
-import { Route as ModpacksRouteImport } from './routes/modpacks'
-import { Route as RoadmapRouteImport } from './routes/roadmap'
-import { Route as NewsIndexRouteImport } from './routes/news/index'
-import { Route as NewsSlugRouteImport } from './routes/news/$slug'
+import { Route as rootRouteImport } from "./routes/__root";
+import { Route as IndexRouteImport } from "./routes/index";
+import { Route as FinancesRouteImport } from "./routes/finances";
+import { Route as LauncherRouteImport } from "./routes/launcher";
+import { Route as ModpacksRouteImport } from "./routes/modpacks";
+import { Route as RoadmapRouteImport } from "./routes/roadmap";
+import { Route as ApiSearchRouteImport } from "./routes/api/search";
+import { Route as DocsSplatRouteImport } from "./routes/docs/$";
+import { Route as JoinIndexRouteImport } from "./routes/join/index";
+import { Route as JoinPositionIdRouteImport } from "./routes/join/$positionId";
+import { Route as NewsIndexRouteImport } from "./routes/news/index";
+import { Route as NewsSlugRouteImport } from "./routes/news/$slug";
+import type { getRouter } from "./router.tsx";
 
 const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: "/",
+    path: "/",
+    getParentRoute: () => rootRouteImport,
+} as any);
 const FinancesRoute = FinancesRouteImport.update({
-  id: '/finances',
-  path: '/finances',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: "/finances",
+    path: "/finances",
+    getParentRoute: () => rootRouteImport,
+} as any);
 const LauncherRoute = LauncherRouteImport.update({
-  id: '/launcher',
-  path: '/launcher',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: "/launcher",
+    path: "/launcher",
+    getParentRoute: () => rootRouteImport,
+} as any);
 const ModpacksRoute = ModpacksRouteImport.update({
-  id: '/modpacks',
-  path: '/modpacks',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: "/modpacks",
+    path: "/modpacks",
+    getParentRoute: () => rootRouteImport,
+} as any);
 const RoadmapRoute = RoadmapRouteImport.update({
-  id: '/roadmap',
-  path: '/roadmap',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: "/roadmap",
+    path: "/roadmap",
+    getParentRoute: () => rootRouteImport,
+} as any);
+const ApiSearchRoute = ApiSearchRouteImport.update({
+    id: "/api/search",
+    path: "/api/search",
+    getParentRoute: () => rootRouteImport,
+} as any);
+const DocsSplatRoute = DocsSplatRouteImport.update({
+    id: "/docs/$",
+    path: "/docs/$",
+    getParentRoute: () => rootRouteImport,
+} as any);
+const JoinIndexRoute = JoinIndexRouteImport.update({
+    id: "/join/",
+    path: "/join/",
+    getParentRoute: () => rootRouteImport,
+} as any);
+const JoinPositionIdRoute = JoinPositionIdRouteImport.update({
+    id: "/join/$positionId",
+    path: "/join/$positionId",
+    getParentRoute: () => rootRouteImport,
+} as any);
 const NewsIndexRoute = NewsIndexRouteImport.update({
-  id: '/news/',
-  path: '/news/',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: "/news/",
+    path: "/news/",
+    getParentRoute: () => rootRouteImport,
+} as any);
 const NewsSlugRoute = NewsSlugRouteImport.update({
-  id: '/news/$slug',
-  path: '/news/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: "/news/$slug",
+    path: "/news/$slug",
+    getParentRoute: () => rootRouteImport,
+} as any);
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/finances': typeof FinancesRoute
-  '/launcher': typeof LauncherRoute
-  '/modpacks': typeof ModpacksRoute
-  '/roadmap': typeof RoadmapRoute
-  '/news/$slug': typeof NewsSlugRoute
-  '/news/': typeof NewsIndexRoute
+    "/": typeof IndexRoute;
+    "/finances": typeof FinancesRoute;
+    "/launcher": typeof LauncherRoute;
+    "/modpacks": typeof ModpacksRoute;
+    "/roadmap": typeof RoadmapRoute;
+    "/api/search": typeof ApiSearchRoute;
+    "/docs/$": typeof DocsSplatRoute;
+    "/join/$positionId": typeof JoinPositionIdRoute;
+    "/news/$slug": typeof NewsSlugRoute;
+    "/join/": typeof JoinIndexRoute;
+    "/news/": typeof NewsIndexRoute;
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/finances': typeof FinancesRoute
-  '/launcher': typeof LauncherRoute
-  '/modpacks': typeof ModpacksRoute
-  '/roadmap': typeof RoadmapRoute
-  '/news/$slug': typeof NewsSlugRoute
-  '/news': typeof NewsIndexRoute
+    "/": typeof IndexRoute;
+    "/finances": typeof FinancesRoute;
+    "/launcher": typeof LauncherRoute;
+    "/modpacks": typeof ModpacksRoute;
+    "/roadmap": typeof RoadmapRoute;
+    "/api/search": typeof ApiSearchRoute;
+    "/docs/$": typeof DocsSplatRoute;
+    "/join/$positionId": typeof JoinPositionIdRoute;
+    "/news/$slug": typeof NewsSlugRoute;
+    "/join": typeof JoinIndexRoute;
+    "/news": typeof NewsIndexRoute;
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/finances': typeof FinancesRoute
-  '/launcher': typeof LauncherRoute
-  '/modpacks': typeof ModpacksRoute
-  '/roadmap': typeof RoadmapRoute
-  '/news/$slug': typeof NewsSlugRoute
-  '/news/': typeof NewsIndexRoute
+    __root__: typeof rootRouteImport;
+    "/": typeof IndexRoute;
+    "/finances": typeof FinancesRoute;
+    "/launcher": typeof LauncherRoute;
+    "/modpacks": typeof ModpacksRoute;
+    "/roadmap": typeof RoadmapRoute;
+    "/api/search": typeof ApiSearchRoute;
+    "/docs/$": typeof DocsSplatRoute;
+    "/join/$positionId": typeof JoinPositionIdRoute;
+    "/news/$slug": typeof NewsSlugRoute;
+    "/join/": typeof JoinIndexRoute;
+    "/news/": typeof NewsIndexRoute;
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/finances'
-    | '/launcher'
-    | '/modpacks'
-    | '/roadmap'
-    | '/news/$slug'
-    | '/news/'
-  fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/finances'
-    | '/launcher'
-    | '/modpacks'
-    | '/roadmap'
-    | '/news/$slug'
-    | '/news'
-  id:
-    | '__root__'
-    | '/'
-    | '/finances'
-    | '/launcher'
-    | '/modpacks'
-    | '/roadmap'
-    | '/news/$slug'
-    | '/news/'
-  fileRoutesById: FileRoutesById
+    fileRoutesByFullPath: FileRoutesByFullPath;
+    fullPaths:
+        | "/"
+        | "/finances"
+        | "/launcher"
+        | "/modpacks"
+        | "/roadmap"
+        | "/api/search"
+        | "/docs/$"
+        | "/join/$positionId"
+        | "/news/$slug"
+        | "/join/"
+        | "/news/";
+    fileRoutesByTo: FileRoutesByTo;
+    to:
+        | "/"
+        | "/finances"
+        | "/launcher"
+        | "/modpacks"
+        | "/roadmap"
+        | "/api/search"
+        | "/docs/$"
+        | "/join/$positionId"
+        | "/news/$slug"
+        | "/join"
+        | "/news";
+    id:
+        | "__root__"
+        | "/"
+        | "/finances"
+        | "/launcher"
+        | "/modpacks"
+        | "/roadmap"
+        | "/api/search"
+        | "/docs/$"
+        | "/join/$positionId"
+        | "/news/$slug"
+        | "/join/"
+        | "/news/";
+    fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  FinancesRoute: typeof FinancesRoute
-  LauncherRoute: typeof LauncherRoute
-  ModpacksRoute: typeof ModpacksRoute
-  RoadmapRoute: typeof RoadmapRoute
-  NewsSlugRoute: typeof NewsSlugRoute
-  NewsIndexRoute: typeof NewsIndexRoute
+    IndexRoute: typeof IndexRoute;
+    FinancesRoute: typeof FinancesRoute;
+    LauncherRoute: typeof LauncherRoute;
+    ModpacksRoute: typeof ModpacksRoute;
+    RoadmapRoute: typeof RoadmapRoute;
+    ApiSearchRoute: typeof ApiSearchRoute;
+    DocsSplatRoute: typeof DocsSplatRoute;
+    JoinPositionIdRoute: typeof JoinPositionIdRoute;
+    NewsSlugRoute: typeof NewsSlugRoute;
+    JoinIndexRoute: typeof JoinIndexRoute;
+    NewsIndexRoute: typeof NewsIndexRoute;
 }
 
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+declare module "@tanstack/react-router" {
+    interface FileRoutesByPath {
+        "/": {
+            id: "/";
+            path: "/";
+            fullPath: "/";
+            preLoaderRoute: typeof IndexRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        "/finances": {
+            id: "/finances";
+            path: "/finances";
+            fullPath: "/finances";
+            preLoaderRoute: typeof FinancesRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        "/launcher": {
+            id: "/launcher";
+            path: "/launcher";
+            fullPath: "/launcher";
+            preLoaderRoute: typeof LauncherRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        "/modpacks": {
+            id: "/modpacks";
+            path: "/modpacks";
+            fullPath: "/modpacks";
+            preLoaderRoute: typeof ModpacksRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        "/roadmap": {
+            id: "/roadmap";
+            path: "/roadmap";
+            fullPath: "/roadmap";
+            preLoaderRoute: typeof RoadmapRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        "/api/search": {
+            id: "/api/search";
+            path: "/api/search";
+            fullPath: "/api/search";
+            preLoaderRoute: typeof ApiSearchRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        "/docs/$": {
+            id: "/docs/$";
+            path: "/docs/$";
+            fullPath: "/docs/$";
+            preLoaderRoute: typeof DocsSplatRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        "/join/": {
+            id: "/join/";
+            path: "/join";
+            fullPath: "/join/";
+            preLoaderRoute: typeof JoinIndexRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        "/join/$positionId": {
+            id: "/join/$positionId";
+            path: "/join/$positionId";
+            fullPath: "/join/$positionId";
+            preLoaderRoute: typeof JoinPositionIdRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        "/news/": {
+            id: "/news/";
+            path: "/news";
+            fullPath: "/news/";
+            preLoaderRoute: typeof NewsIndexRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        "/news/$slug": {
+            id: "/news/$slug";
+            path: "/news/$slug";
+            fullPath: "/news/$slug";
+            preLoaderRoute: typeof NewsSlugRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
     }
-    '/finances': {
-      id: '/finances'
-      path: '/finances'
-      fullPath: '/finances'
-      preLoaderRoute: typeof FinancesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/launcher': {
-      id: '/launcher'
-      path: '/launcher'
-      fullPath: '/launcher'
-      preLoaderRoute: typeof LauncherRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/modpacks': {
-      id: '/modpacks'
-      path: '/modpacks'
-      fullPath: '/modpacks'
-      preLoaderRoute: typeof ModpacksRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/roadmap': {
-      id: '/roadmap'
-      path: '/roadmap'
-      fullPath: '/roadmap'
-      preLoaderRoute: typeof RoadmapRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/news/': {
-      id: '/news/'
-      path: '/news'
-      fullPath: '/news/'
-      preLoaderRoute: typeof NewsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/news/$slug': {
-      id: '/news/$slug'
-      path: '/news/$slug'
-      fullPath: '/news/$slug'
-      preLoaderRoute: typeof NewsSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-  }
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  FinancesRoute: FinancesRoute,
-  LauncherRoute: LauncherRoute,
-  ModpacksRoute: ModpacksRoute,
-  RoadmapRoute: RoadmapRoute,
-  NewsSlugRoute: NewsSlugRoute,
-  NewsIndexRoute: NewsIndexRoute,
-}
+    IndexRoute: IndexRoute,
+    FinancesRoute: FinancesRoute,
+    LauncherRoute: LauncherRoute,
+    ModpacksRoute: ModpacksRoute,
+    RoadmapRoute: RoadmapRoute,
+    ApiSearchRoute: ApiSearchRoute,
+    DocsSplatRoute: DocsSplatRoute,
+    JoinPositionIdRoute: JoinPositionIdRoute,
+    NewsSlugRoute: NewsSlugRoute,
+    JoinIndexRoute: JoinIndexRoute,
+    NewsIndexRoute: NewsIndexRoute,
+};
 export const routeTree = rootRouteImport
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+    ._addFileChildren(rootRouteChildren)
+    ._addFileTypes<FileRouteTypes>();
 
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
+declare module "@tanstack/react-start" {
+    interface Register {
+        ssr: true;
+        router: Awaited<ReturnType<typeof getRouter>>;
+    }
 }

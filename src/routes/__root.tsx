@@ -1,19 +1,19 @@
 import {
+    createRootRouteWithContext,
     HeadContent,
     Scripts,
-    createRootRouteWithContext,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import TanStackQueryDevtools from "../lib/queries/devtools.js";
-import { CmsFonts } from "../components/general/CmsFonts";
 import { DeveloperHint } from "../components/general/DeveloperHint";
-import { LoadingScreen } from "../components/general/LoadingScreen";
 import { NotFoundPage } from "../components/general/NotFoundPage";
+import { SiteReveal } from "../components/general/SiteReveal";
 
 import appCss from "../styles.css?url";
 
 import type { QueryClient } from "@tanstack/react-query";
+import { RootProvider } from "fumadocs-ui/provider/tanstack";
 
 interface MyRouterContext {
     queryClient: QueryClient;
@@ -25,6 +25,13 @@ const INITIAL_SCROLL_SCRIPT = `
     } catch {
         document.documentElement.dataset.siteTheme = "brass";
     }
+    try {
+        if (window.sessionStorage.getItem("brassworks-header-built")) {
+            document.documentElement.dataset.headerBuilt = "true";
+        } else {
+            window.sessionStorage.setItem("brassworks-header-built", "true");
+        }
+    } catch {}
     if ("scrollRestoration" in window.history) {
         window.history.scrollRestoration = "manual";
     }
@@ -50,6 +57,20 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         ],
         links: [
             {
+                rel: "preload",
+                href: "/fonts/minecraft-regular.woff2",
+                as: "font",
+                type: "font/woff2",
+                crossOrigin: "anonymous",
+            },
+            {
+                rel: "preload",
+                href: "/fonts/minecraft-bold.woff2",
+                as: "font",
+                type: "font/woff2",
+                crossOrigin: "anonymous",
+            },
+            {
                 rel: "stylesheet",
                 href: appCss,
             },
@@ -70,13 +91,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                 <script
                     dangerouslySetInnerHTML={{ __html: INITIAL_SCROLL_SCRIPT }}
                 />
-                <HeadContent/>
-                <CmsFonts/>
+                <HeadContent />
             </head>
             <body>
-                <DeveloperHint/>
-                <LoadingScreen/>
-                {children}
+                <DeveloperHint />
+                <SiteReveal />
+                <RootProvider>{children}</RootProvider>
                 <TanStackDevtools
                     config={{
                         position: "bottom-right",
@@ -84,12 +104,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                     plugins={[
                         {
                             name: "Tanstack Router",
-                            render: <TanStackRouterDevtoolsPanel/>,
+                            render: <TanStackRouterDevtoolsPanel />,
                         },
                         TanStackQueryDevtools,
                     ]}
                 />
-                <Scripts/>
+                <Scripts />
             </body>
         </html>
     );

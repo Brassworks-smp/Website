@@ -8,21 +8,23 @@ Interested in joining us? Visit https://discord.gg/brassworks and apply now! :P
 `;
 
 export function DeveloperHint() {
-  useEffect(() => {
-    const existingHint = Array.from(document.documentElement.childNodes).find(
-      (node) =>
-        node.nodeType === Node.COMMENT_NODE &&
-        node.textContent?.includes(DEVELOPER_HINT_MARKER),
-    );
+    useEffect(() => {
+        const existingHint = Array.from(
+            document.documentElement.childNodes,
+        ).find(
+            (node) =>
+                node.nodeType === Node.COMMENT_NODE &&
+                node.textContent?.includes(DEVELOPER_HINT_MARKER),
+        );
 
-    if (existingHint) return;
+        if (existingHint) return;
 
-    const hint = document.createComment(DEVELOPER_HINT);
+        const hint = document.createComment(DEVELOPER_HINT);
 
-    document.documentElement.insertBefore(hint, document.head);
+        document.documentElement.insertBefore(hint, document.head);
 
-    return () => hint.remove();
-  }, []);
+        return () => hint.remove();
+    }, []);
 
-  return null;
+    return null;
 }

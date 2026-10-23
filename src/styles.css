@@ -1,6 +1,32 @@
 @import "tailwindcss";
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
 
 @import "styles/theme.css";
+
+@font-face {
+    font-family: "minecraft";
+    src: url("/fonts/minecraft-regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "minecraft";
+    src: url("/fonts/minecraft-bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "minecraft";
+    src: url("/fonts/minecraft-italic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
 
 :root {
     --site-motion-fast: 320ms;
@@ -251,7 +277,7 @@ html[data-site-theme] body {
 }
 
 .launcher-theme-background {
-    animation: launcher-background-in 1000ms cubic-bezier(0.22, 1, 0.36, 1) both, launcher-background-drift 24s ease-in-out infinite alternate;
+    animation: launcher-background-in 1000ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .outer.launcher-hero-shell {
@@ -269,36 +295,25 @@ html[data-site-theme] body {
     --spacing-y: calc(var(--big-circle-radius) + var(--pillar-y));
     --extension-x: calc(var(--circle-radius) + var(--spacing-x));
     --extension-y: calc(var(--circle-radius) + var(--spacing-y));
-    --cutout-mask:
-        radial-gradient(
-            circle at 100% 100%,
-            transparent var(--big-circle-radius),
-            #000 calc(var(--big-circle-radius) + 1px)
-        )
-        0 0 / calc(100% - var(--pillar-x)) calc(100% - var(--pillar-y))
-        no-repeat,
-        radial-gradient(
-            circle closest-side,
-            #000 100%,
-            transparent calc(100% + 1px)
-        )
-        calc(100% - var(--spacing-x)) 100% / var(--circle-diameter)
-        var(--circle-diameter) no-repeat,
-        radial-gradient(
-            circle closest-side,
-            #000 100%,
-            transparent calc(100% + 1px)
-        )
-        100% calc(100% - var(--spacing-y)) / var(--circle-diameter)
-        var(--circle-diameter) no-repeat,
-        linear-gradient(#000 0 0) 0 0 / calc(100% - var(--spacing-x))
-        calc(100% - var(--circle-radius)) no-repeat,
-        linear-gradient(#000 0 0) 0 100% / calc(100% - var(--extension-x))
-        var(--circle-diameter) no-repeat,
-        linear-gradient(#000 0 0) 100% 0 / var(--circle-diameter)
-        calc(100% - var(--extension-y)) no-repeat,
-        linear-gradient(#000 0 0) 0 0 / calc(100% - var(--circle-radius))
-        calc(100% - var(--spacing-y)) no-repeat;
+    --cutout-mask: radial-gradient(
+        circle at 100% 100%,
+        transparent var(--big-circle-radius),
+        #000 calc(var(--big-circle-radius) + 1px)
+    ) 0 0 / calc(100% - var(--pillar-x)) calc(100% - var(--pillar-y)) no-repeat,
+    radial-gradient(
+        circle closest-side,
+        #000 100%,
+        transparent calc(100% + 1px)
+    ) calc(100% - var(--spacing-x)) 100% / var(--circle-diameter) var(--circle-diameter) no-repeat,
+    radial-gradient(
+        circle closest-side,
+        #000 100%,
+        transparent calc(100% + 1px)
+    ) 100% calc(100% - var(--spacing-y)) / var(--circle-diameter) var(--circle-diameter) no-repeat,
+    linear-gradient(#000 0 0) 0 0 / calc(100% - var(--spacing-x)) calc(100% - var(--circle-radius)) no-repeat,
+    linear-gradient(#000 0 0) 0 100% / calc(100% - var(--extension-x)) var(--circle-diameter) no-repeat,
+    linear-gradient(#000 0 0) 100% 0 / var(--circle-diameter) calc(100% - var(--extension-y)) no-repeat,
+    linear-gradient(#000 0 0) 0 0 / calc(100% - var(--circle-radius)) calc(100% - var(--spacing-y)) no-repeat;
 
     overflow: hidden;
     border-radius: var(--outer-radius) var(--outer-radius) 0 var(--outer-radius);
@@ -364,6 +379,18 @@ html[data-site-theme] body {
         -webkit-tap-highlight-color: transparent;
     }
 
+    img {
+        transition: opacity 700ms var(--site-motion-ease);
+    }
+
+    button:not(:disabled),
+    [role="button"]:not([aria-disabled="true"]),
+    summary,
+    label[for],
+    select {
+        cursor: pointer;
+    }
+
     :focus-visible {
         outline: 2px solid var(--site-accent-secondary, #d9b86e);
         outline-offset: 3px;
@@ -371,51 +398,198 @@ html[data-site-theme] body {
 }
 
 @keyframes team-background-in {
-    from { opacity: 0; transform: scale(1.015); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(1.015);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 @keyframes team-background-out {
-    from { opacity: 1; transform: scale(1); }
-    to { opacity: 0; transform: scale(1.008); }
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(1.008);
+    }
 }
 
 @keyframes team-skin-in {
-    from { opacity: 0; transform: translateX(var(--team-skin-entry-x)); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(var(--team-skin-entry-x));
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @keyframes team-skin-out {
-    from { opacity: 1; }
-    to { opacity: 0; }
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
 
 @keyframes team-content-in {
-    from { opacity: 0.72; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0.72;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-@keyframes loading-screen-progress {
-    from { transform: translate3d(-140%, 0, 0); }
-    to { transform: translate3d(240%, 0, 0); }
-}
-
-html:not([data-site-ready="true"]) .site-header,
-html:not([data-site-ready="true"]) body main,
-html:not([data-site-ready="true"]) .site-footer {
-    opacity: 0;
-}
-
-html[data-site-ready="true"] .site-header {
+html:not([data-header-built="true"]) .site-header {
     animation: site-header-in 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-html[data-site-ready="true"] body main {
-    animation: site-content-in 950ms 80ms cubic-bezier(0.22, 1, 0.36, 1) both;
+body main > * {
+    animation: site-content-in 950ms var(--site-build-delay, 120ms) cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-html[data-site-ready="true"] .site-footer {
-    animation: site-content-in 950ms 140ms cubic-bezier(0.22, 1, 0.36, 1) both;
+body main > :nth-child(2) {
+    --site-build-delay: 240ms;
+}
+
+body main > :nth-child(3) {
+    --site-build-delay: 360ms;
+}
+
+body main > :nth-child(n + 4) {
+    --site-build-delay: 480ms;
+}
+
+.site-footer {
+    animation: site-content-in 950ms 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html[data-image-reveal="true"] img:not([data-loaded="true"]) {
+    opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html:not([data-header-built="true"]) .site-header > div > *,
+    html:not([data-header-built="true"]) .site-header nav > * {
+        animation: site-build-in 700ms var(--site-build-delay, 200ms) cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .site-header > div > :nth-child(2),
+    .site-header nav > :nth-child(1) {
+        --site-build-delay: 280ms;
+    }
+
+    .site-header nav > :nth-child(2) {
+        --site-build-delay: 340ms;
+    }
+
+    .site-header nav > :nth-child(3) {
+        --site-build-delay: 400ms;
+    }
+
+    .site-header nav > :nth-child(4),
+    .site-header > div > :nth-child(3) {
+        --site-build-delay: 460ms;
+    }
+
+    .site-header nav > :nth-child(n + 5),
+    .site-header > div > :nth-child(n + 4) {
+        --site-build-delay: 520ms;
+    }
+
+    #create a,
+    #create strong,
+    #create small,
+    #create [role="tablist"] > * {
+        animation: site-build-in 800ms var(--site-build-delay, 520ms) cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    #create strong {
+        --site-build-delay: 600ms;
+    }
+
+    #create small {
+        --site-build-delay: 680ms;
+    }
+
+    #create [role="tablist"] > :nth-child(1) {
+        --site-build-delay: 640ms;
+    }
+
+    #create [role="tablist"] > :nth-child(2) {
+        --site-build-delay: 720ms;
+    }
+
+    #create [role="tablist"] > :nth-child(3) {
+        --site-build-delay: 800ms;
+    }
+
+    #create [role="tablist"] > :nth-child(4) {
+        --site-build-delay: 880ms;
+    }
+
+    #create [role="tablist"] > :nth-child(n + 5) {
+        --site-build-delay: 960ms;
+    }
+
+    @supports (animation-timeline: view()) {
+        main section:not(#create) :is(h1, h2, h3, p, ul, ol, dl, pre, label, header > span, a[class*="rounded-"], button[class*="rounded-"], .outer):not(:is(.grid > *, .outer) *),
+        main section:not(#create) .grid > :not(:is(.grid > *) *),
+        .site-footer :is(p, h2, li, a[aria-label]),
+        .site-footer > div:last-child > span {
+            animation: site-build-reveal linear both;
+            animation-timeline: view();
+            animation-range: entry var(--site-reveal-start, 0%) entry calc(var(--site-reveal-start, 0%) + 45%);
+        }
+
+        main section .grid > :nth-child(2),
+        .site-footer li:nth-child(2),
+        .site-footer a[aria-label]:nth-child(2) {
+            --site-reveal-start: 8%;
+        }
+
+        main section .grid > :nth-child(3),
+        .site-footer li:nth-child(3),
+        .site-footer a[aria-label]:nth-child(3) {
+            --site-reveal-start: 16%;
+        }
+
+        main section .grid > :nth-child(4),
+        .site-footer li:nth-child(4),
+        .site-footer a[aria-label]:nth-child(4) {
+            --site-reveal-start: 24%;
+        }
+
+        main section .grid > :nth-child(n + 5),
+        .site-footer li:nth-child(n + 5),
+        .site-footer a[aria-label]:nth-child(n + 5) {
+            --site-reveal-start: 32%;
+        }
+    }
+}
+
+@keyframes site-build-in {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 10px, 0);
+    }
+}
+
+@keyframes site-build-reveal {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 32px, 0) scale(0.985);
+    }
 }
 
 .header-dropdown-panel,
@@ -423,9 +597,8 @@ html[data-site-ready="true"] .site-footer {
     opacity: 0;
     pointer-events: none;
     transform: translate3d(0, 8px, 0);
-    transition:
-        opacity 500ms cubic-bezier(0.22, 1, 0.36, 1),
-        transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
     will-change: opacity, transform;
 }
 
@@ -440,63 +613,143 @@ html[data-site-ready="true"] .site-footer {
     transform: translate3d(0, -12px, 0);
 }
 
-.header-mobile-dropdown {
-    display: grid;
-    grid-template-rows: 0fr;
-    opacity: 0;
-    transition:
-        grid-template-rows 500ms cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 500ms cubic-bezier(0.22, 1, 0.36, 1);
+.mobile-sheet {
+    visibility: hidden;
+    pointer-events: none;
+    transition: visibility 0s linear 500ms;
 }
 
-.header-mobile-dropdown[data-open="true"] {
-    grid-template-rows: 1fr;
+.mobile-sheet[data-open="true"] {
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+}
+
+.mobile-sheet-backdrop {
+    opacity: 0;
+    transition: opacity 500ms ease;
+}
+
+.mobile-sheet[data-open="true"] .mobile-sheet-backdrop {
     opacity: 1;
 }
 
+.mobile-sheet-panel {
+    transform: translate3d(0, 100%, 0);
+    transition: transform 450ms cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
+.mobile-sheet[data-open="true"] .mobile-sheet-panel {
+    transform: translate3d(0, 0, 0);
+    transition: transform 500ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.mobile-snap-row {
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+.mobile-snap-row::-webkit-scrollbar {
+    display: none;
+}
+
+.mobile-snap-row > * {
+    scroll-snap-align: start;
+}
+
+@media (max-width: 1023px) {
+    body {
+        padding-bottom: 64px;
+    }
+}
+
 @keyframes site-header-in {
-    from { opacity: 0; transform: translate3d(0, -7px, 0); }
-    to { opacity: 1; transform: translate3d(0, 0, 0); }
+    from {
+        opacity: 0;
+        transform: translate3d(0, -7px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
 }
 
 @keyframes site-content-in {
-    from { opacity: 0; transform: translate3d(0, 9px, 0); }
-    to { opacity: 1; transform: translate3d(0, 0, 0); }
+    from {
+        opacity: 0;
+        transform: translate3d(0, 9px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
 }
 
 @keyframes launcher-preview-in {
-    from { opacity: 0.72; transform: translate3d(8px, 6px, 0); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+    from {
+        opacity: 0.72;
+        transform: translate3d(8px, 6px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 @keyframes launcher-background-in {
-    from { filter: brightness(0.82) saturate(0.88); }
-    to { filter: brightness(1) saturate(1); }
+    from {
+        filter: brightness(0.82) saturate(0.88);
+    }
+    to {
+        filter: brightness(1) saturate(1);
+    }
 }
 
 @keyframes launcher-window-in {
-    from { opacity: 0.72; transform: translate3d(18px, 8px, 0); }
-    to { opacity: 1; transform: translate3d(0, 0, 0); }
+    from {
+        opacity: 0.72;
+        transform: translate3d(18px, 8px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
 }
 
 @keyframes launcher-badge-in {
-    from { opacity: 0; transform: translate3d(-8px, 4px, 0); }
-    to { opacity: 1; transform: translate3d(0, 0, 0); }
+    from {
+        opacity: 0;
+        transform: translate3d(-8px, 4px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
 }
 
 @keyframes launcher-share-primary-in {
-    from { opacity: 0.72; transform: translate3d(-14px, 7px, 0); }
-    to { opacity: 1; transform: translate3d(0, 0, 0); }
+    from {
+        opacity: 0.72;
+        transform: translate3d(-14px, 7px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
 }
 
 @keyframes launcher-share-secondary-in {
-    from { opacity: 0.72; transform: translate3d(15px, 9px, 0); }
-    to { opacity: 1; transform: translate3d(0, 0, 0); }
-}
-
-@keyframes launcher-background-drift {
-    from { transform: scale(1.015) translate3d(-0.5%, 0, 0); }
-    to { transform: scale(1.035) translate3d(0.5%, -0.5%, 0); }
+    from {
+        opacity: 0.72;
+        transform: translate3d(15px, 9px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
 }
 
 .roadmap-rich-text .roadmap-smart-card {
@@ -513,8 +766,8 @@ html[data-site-ready="true"] .site-footer {
     color: #d9b86e;
     text-decoration: none !important;
     transition: border-color var(--site-motion-standard) var(--site-motion-ease),
-        background-color var(--site-motion-standard) var(--site-motion-ease),
-        color var(--site-motion-standard) var(--site-motion-ease);
+    background-color var(--site-motion-standard) var(--site-motion-ease),
+    color var(--site-motion-standard) var(--site-motion-ease);
 }
 
 .roadmap-rich-text .roadmap-smart-card:hover {
@@ -661,6 +914,12 @@ html[data-site-ready="true"] .site-footer {
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
+    }
+
+    .site-header,
+    body main > *,
+    .site-footer {
+        animation: none;
     }
 
     .site-interactive,

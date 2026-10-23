@@ -45,8 +45,10 @@ function decodeHtml(value: string) {
         .replace(/&#(\d+);/g, (_, code: string) =>
             String.fromCodePoint(Number.parseInt(code, 10)),
         )
-        .replace(/&([a-z]+);/gi, (entity, name: string) =>
-            namedEntities[name.toLowerCase()] ?? entity,
+        .replace(
+            /&([a-z]+);/gi,
+            (entity, name: string) =>
+                namedEntities[name.toLowerCase()] ?? entity,
         )
         .replace(/\s+/g, " ")
         .trim();
@@ -75,7 +77,8 @@ function prepareArticle(content: string): PreparedArticle {
             const label = decodeHtml(innerHtml);
             const baseId = createHeadingId(label);
             const occurrence = occurrences.get(baseId) ?? 0;
-            const id = occurrence === 0 ? baseId : `${baseId}-${occurrence + 1}`;
+            const id =
+                occurrence === 0 ? baseId : `${baseId}-${occurrence + 1}`;
             const level = Number(rawLevel) as ArticleHeading["level"];
             const attributes = rawAttributes.replace(
                 /\s+id=(?:"[^"]*"|'[^']*')/gi,
@@ -147,8 +150,8 @@ function scrollToHeading(target: HTMLElement) {
     const targetTop = target.getBoundingClientRect().top + currentScrollTop;
     const maxScrollTop = Math.max(
         0,
-        (scrollingElement?.scrollHeight ?? document.documentElement.scrollHeight) -
-            window.innerHeight,
+        (scrollingElement?.scrollHeight ??
+            document.documentElement.scrollHeight) - window.innerHeight,
     );
     const top = Math.min(
         maxScrollTop,
@@ -183,9 +186,7 @@ function useActiveHeading(
         }
 
         const getTarget = (headingId: string) =>
-            articleRoot.querySelector<HTMLElement>(
-                `#${CSS.escape(headingId)}`,
-            );
+            articleRoot.querySelector<HTMLElement>(`#${CSS.escape(headingId)}`);
 
         const getTargets = () =>
             headings
@@ -244,7 +245,9 @@ function useActiveHeading(
             const atPageEnd = maxScrollTop - getPageScrollTop() <= 2;
             const nextTarget = atPageEnd
                 ? renderedTargets[renderedTargets.length - 1]
-                : closestPassedTarget ?? closestUpcomingTarget ?? renderedTargets[0];
+                : (closestPassedTarget ??
+                  closestUpcomingTarget ??
+                  renderedTargets[0]);
             const nextActiveId = nextTarget.id;
 
             setActiveId((current) =>
@@ -280,7 +283,8 @@ function useActiveHeading(
             const trackedTarget = getTarget(headings[0].id);
 
             if (!trackedTarget) {
-                geometryFrame = window.requestAnimationFrame(watchHeadingPosition);
+                geometryFrame =
+                    window.requestAnimationFrame(watchHeadingPosition);
                 return;
             }
 
@@ -327,11 +331,11 @@ function useActiveHeading(
 }
 
 function TableOfContents({
-                             headings,
-                             activeId,
-                             showTitle = true,
-                             onNavigate,
-                         }: {
+    headings,
+    activeId,
+    showTitle = true,
+    onNavigate,
+}: {
     headings: ArticleHeading[];
     activeId: string;
     showTitle?: boolean;
@@ -347,11 +351,13 @@ function TableOfContents({
         <nav aria-label="Article contents">
             {showTitle ? (
                 <span className="font-minecraft text-[10px] font-bold uppercase tracking-[0.14em] text-[#d9b86e]">
-          On this page
-        </span>
+                    On this page
+                </span>
             ) : null}
 
-            <ol className={`${showTitle ? "mt-4" : "mt-1"} border-l border-white/10`}>
+            <ol
+                className={`${showTitle ? "mt-4" : "mt-1"} border-l border-white/10`}
+            >
                 {headings.map((heading) => {
                     const active = heading.id === activeId;
 
@@ -365,8 +371,8 @@ function TableOfContents({
                                     heading.level === 2
                                         ? "pl-4 font-semibold"
                                         : heading.level === 3
-                                            ? "pl-7 text-[13px]"
-                                            : "pl-10 text-xs"
+                                          ? "pl-7 text-[13px]"
+                                          : "pl-10 text-xs"
                                 } ${
                                     active
                                         ? "translate-x-0.5 border-[#d9b86e] text-white"
@@ -426,9 +432,9 @@ function ShareButtons({ title, url }: { title: string; url: string }) {
 
     return (
         <div>
-      <span className="font-minecraft text-[10px] font-bold uppercase tracking-[0.14em] text-[#d9b86e]">
-        Share
-      </span>
+            <span className="font-minecraft text-[10px] font-bold uppercase tracking-[0.14em] text-[#d9b86e]">
+                Share
+            </span>
 
             <div className="mt-3 flex gap-2 xl:grid xl:grid-cols-4">
                 {links.map(({ label, href, icon: Icon }) => (
@@ -460,11 +466,11 @@ function ShareButtons({ title, url }: { title: string; url: string }) {
 }
 
 export function ArticleContent({
-                                   articleId,
-                                   content,
-                                   title,
-                                   url,
-                               }: {
+    articleId,
+    content,
+    title,
+    url,
+}: {
     articleId: string;
     content: string;
     title: string;
@@ -472,31 +478,21 @@ export function ArticleContent({
 }) {
     const article = useMemo(() => prepareArticle(content), [content]);
     const articleRootRef = useRef<HTMLDivElement | null>(null);
-    const activeId = useActiveHeading(
-        article.headings,
-        articleRootRef,
-    );
+    const activeId = useActiveHeading(article.headings, articleRootRef);
     const [contentsOpen, setContentsOpen] = useState(false);
 
-    const navigateToHeading = useCallback(
-        (headingId: string) => {
-            const target = articleRootRef.current?.querySelector<HTMLElement>(
-                `#${CSS.escape(headingId)}`,
-            );
+    const navigateToHeading = useCallback((headingId: string) => {
+        const target = articleRootRef.current?.querySelector<HTMLElement>(
+            `#${CSS.escape(headingId)}`,
+        );
 
-            if (!target) {
-                return;
-            }
+        if (!target) {
+            return;
+        }
 
-            scrollToHeading(target);
-            window.history.replaceState(
-                window.history.state,
-                "",
-                `#${headingId}`,
-            );
-        },
-        [],
-    );
+        scrollToHeading(target);
+        window.history.replaceState(window.history.state, "", `#${headingId}`);
+    }, []);
 
     return (
         <div className="mx-auto mt-12 max-w-[1200px] border-t border-white/8 pt-10 sm:mt-14 sm:pt-12">
